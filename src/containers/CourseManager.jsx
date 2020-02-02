@@ -40,6 +40,9 @@ class CourseManager extends Component {
       let courses = [...this.state.courses];
       courses.push(newCourse);
       courses = _.sortBy(courses,'title')
+      if(this.state.order==='desc'){
+        courses.reverse()
+      }
       this.setState({ courses: courses });
     });
   };
@@ -58,6 +61,9 @@ class CourseManager extends Component {
       const indexToDelete = _.findIndex(courses, { _id: courseId });
       courses.splice(indexToDelete, 1);
       courses = _.sortBy(courses,'title')
+      if(this.state.order==='desc'){
+        courses.reverse()
+      }
       this.setState({ courses: courses });
     });
   };
@@ -66,18 +72,17 @@ class CourseManager extends Component {
     return (
       <>
         <NavBar title="Course Manager" onAddCourse={this.addCourse} />
-        <div className="container">
-          <div className="row">
+          <div className="row mx-0">
             <div className="col-12" align="right">
               {this.state.order === "asc" && (
                 <i
-                  className="fa fa-2x fa-sort-alpha-asc mr-3"
+                  className="fa fa-2x fa-sort-alpha-asc"
                   onClick={this.toggleOrder}
                 ></i>
               )}
               {this.state.order === "desc" && (
                 <i
-                  className="fa fa-2x fa-sort-alpha-desc mr-3"
+                  className="fa fa-2x fa-sort-alpha-desc"
                   onClick={this.toggleOrder}
                 ></i>
               )}
@@ -95,6 +100,7 @@ class CourseManager extends Component {
               )}
             </div>
           </div>
+        <div className={this.state.view==='list'?"container" : ""}>
           {this.state.courses === undefined && (
             <h4 className="text-center">Fetching Courses...</h4>
           )}

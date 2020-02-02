@@ -13,18 +13,24 @@ class CourseCard extends Component {
               className="course-image"
               src={process.env.PUBLIC_URL + "/online-course.svg"}
             ></img>
-            <p className="card-title"><b>Course Title: </b>{this.props.course.title}</p>
-            <p><b> Modified: </b>{moment(this.props.course.lastModified).fromNow()}</p>
+            <p className="card-title">
+              <b>Course Title: </b>
+              {this.props.course.title}
+            </p>
+            <p>
+              <b> Modified: </b>
+              {moment(this.props.course.lastModified).fromNow()}
+            </p>
           </div>
-            <div className="card-footer">
-              <i className="fa fa-2x fa-pencil mx-2"></i>
-              <i
-                className="fa fa-2x fa-trash mx-2"
-                onClick={() => this.props.onDelete(this.props.course._id)}
-              >
-                {" "}
-              </i>
-            </div>
+          <div className="card-footer">
+            <i className="fa fa-2x fa-pencil mx-2 text-success"></i>
+            <i
+              className="fa fa-2x fa-trash mx-2  text-danger"
+              onClick={() => this.props.onDelete(this.props.course._id)}
+            >
+              {" "}
+            </i>
+          </div>
         </div>
       </div>
     );

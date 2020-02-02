@@ -16,9 +16,9 @@ const CourseRow = props => {
         {moment(props.course.lastModified).fromNow()}
       </td>
       <td className="text-right">
-        <i className="fa fa-2x fa-pencil mx-2"></i>
+        <i className="fa fa-2x fa-pencil mx-2 text-success"></i>
         <i
-          className="fa fa-2x fa-trash mx-2"
+          className="fa fa-2x fa-trash mx-2 text-danger"
           onClick={() => props.onDelete(props.course._id)}
         >
           {" "}
