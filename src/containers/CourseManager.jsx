@@ -23,6 +23,7 @@ class CourseManager extends Component {
 
   getCourses = () => {
     findAllCourses().then(courses => {
+      courses = _.sortBy(courses,'title')
       this.setState({ courses: courses });
     });
   };
@@ -36,14 +37,15 @@ class CourseManager extends Component {
     };
 
     createCourse(course).then(newCourse => {
-      const courses = [...this.state.courses];
+      let courses = [...this.state.courses];
       courses.push(newCourse);
+      courses = _.sortBy(courses,'title')
       this.setState({ courses: courses });
     });
   };
 
   toggleOrder = () => {
-    this.setState({ order: this.state.order === "asc" ? "desc" : "asc" });
+    this.setState({ order: this.state.order === "asc" ? "desc" : "asc",courses:this.state.courses.reverse() });
   };
 
   toggleView = () => {
@@ -52,9 +54,10 @@ class CourseManager extends Component {
 
   removeCourse = courseId => {
     deleteCourse(courseId).then(() => {
-      const courses = [...this.state.courses];
+      let courses = [...this.state.courses];
       const indexToDelete = _.findIndex(courses, { _id: courseId });
       courses.splice(indexToDelete, 1);
+      courses = _.sortBy(courses,'title')
       this.setState({ courses: courses });
     });
   };
@@ -66,6 +69,18 @@ class CourseManager extends Component {
         <div className="container">
           <div className="row">
             <div className="col-12" align="right">
+              {this.state.order === "asc" && (
+                <i
+                  className="fa fa-2x fa-sort-alpha-asc mr-3"
+                  onClick={this.toggleOrder}
+                ></i>
+              )}
+              {this.state.order === "desc" && (
+                <i
+                  className="fa fa-2x fa-sort-alpha-desc mr-3"
+                  onClick={this.toggleOrder}
+                ></i>
+              )}
               {this.state.view === "list" && (
                 <i
                   className="fa fa-2x fa-th mx-2 my-2"
