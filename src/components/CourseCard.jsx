@@ -8,7 +8,7 @@ class CourseCard extends Component {
     return (
       <div className="col-12 col-sm-6 col-md-4  col-lg-3 col-xl-2 my-2">
         <div className="card">
-          <div className="card-body">
+          <div className="card-body pointer" onClick={this.props.toggleEditor}>
             <img
               className="course-image"
               src={process.env.PUBLIC_URL + "/online-course.svg"}
@@ -23,9 +23,9 @@ class CourseCard extends Component {
             </p>
           </div>
           <div className="card-footer">
-            <i className="fa fa-2x fa-pencil mx-2 text-success"></i>
+            <i className="fa fa-2x fa-pencil mx-2 text-success pointer"></i>
             <i
-              className="fa fa-2x fa-trash mx-2  text-danger"
+              className="fa fa-2x fa-trash mx-2  text-danger pointer"
               onClick={() => this.props.onDelete(this.props.course._id)}
             >
               {" "}

@@ -109,12 +109,14 @@ class CourseManager extends Component {
             <CourseTable
               courses={this.state.courses}
               deleteCourse={this.removeCourse}
+              toggleEditor={this.props.toggleEditor}
             />
           )}
           {this.state.courses !== undefined && this.state.view === "grid" && (
             <CourseGrid
               courses={this.state.courses}
               deleteCourse={this.removeCourse}
+              toggleEditor={this.props.toggleEditor}
             />
           )}
         </div>
