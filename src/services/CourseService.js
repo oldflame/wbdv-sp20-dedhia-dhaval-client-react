@@ -1,4 +1,4 @@
-    const API_URL = "http://wbdv-generic-server.herokuapp.com/api/j4inam/courses"
+    const API_URL = "http://wbdv-generic-server.herokuapp.com/api/001835414/courses"
 
     export const createCourse = async (course) => {
         const response = await fetch(API_URL,{

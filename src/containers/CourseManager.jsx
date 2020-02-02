@@ -84,13 +84,18 @@ class CourseManager extends Component {
             <h4 className="text-center">Fetching Courses...</h4>
           )}
 
-          {this.state.courses  !== undefined && this.state.view === "list" && (
+          {this.state.courses !== undefined && this.state.view === "list" && (
             <CourseTable
               courses={this.state.courses}
               deleteCourse={this.removeCourse}
             />
           )}
-          {this.state.courses !== undefined && this.state.view === "grid" && <CourseGrid />}
+          {this.state.courses !== undefined && this.state.view === "grid" && (
+            <CourseGrid
+              courses={this.state.courses}
+              deleteCourse={this.removeCourse}
+            />
+          )}
         </div>
       </>
     );
