@@ -10,10 +10,7 @@ class NavBar extends Component {
    handleInputChange = (event) => {
      this.setState({courseTitle : event.target.value})
    }
-
-
-
-
+   
   render() { 
     return (
       <div className="">
