@@ -5,7 +5,7 @@ const CourseRow = props => {
   return (
     <tr>
       <td>
-        <div class="pointer" onClick={props.toggleEditor}>
+        <div className="pointer" onClick={props.toggleEditor}>
           <img
             src={process.env.PUBLIC_URL + "/online-course.svg"}
             width="50"

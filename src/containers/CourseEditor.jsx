@@ -1,32 +1,26 @@
 import React, { Component } from "react";
 import ModuleList from "../components/ModuleList";
 import NavBarCourseEditor from "../components/NavBarCourseEditor";
+import "../components/CourseEditor.css";
 
 class CourseEditor extends Component {
   state = {};
   render() {
     return (
       <div>
-        <NavBarCourseEditor />
-        <nav className="navbar navbar-light navbar-color">
-          <form className="form-inline">
-            <div>
-              <a className="navbar-brand navbar-text-color" href="#">
-                <i
-                  class="fa fa-times mr-3 wbdv-course-title wbdv-course-editor wbdv-close"
-                  onClick={this.props.toggleEditor}
-                ></i>
-              </a>
-            </div>
-          </form>
-        </nav>
-        <ModuleList moduleTitle="jQuery" />
-        <ModuleList moduleTitle="React"/>
-        <ModuleList moduleTitle="Redux"/>
-        <ModuleList moduleTitle="Native"/>
-        <ModuleList moduleTitle="Angular"/>
-        <ModuleList moduleTitle="Node"/>
-        <ModuleList moduleTitle="Mongo"/>
+        <NavBarCourseEditor toggleEditor={this.props.toggleEditor} title="Dhaval "/>
+
+
+        <div className="left-bar col-3 pt-3">
+          <ModuleList moduleTitle="1 - jQuery" />
+          <ModuleList moduleTitle="2 - React" />
+          <ModuleList moduleTitle="3 - Redux" />
+          <ModuleList moduleTitle="4 - Native" />
+          <ModuleList moduleTitle="5 - Angular" />
+          <ModuleList moduleTitle="5 - Node" />
+          <ModuleList moduleTitle="6 - Mongo" />
+          <i className="fa fa-2x fa-plus float-right my-3 mr-4"></i>
+        </div>
       </div>
     );
   }
