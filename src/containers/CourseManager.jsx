@@ -5,7 +5,9 @@ import CourseGrid from "../components/CourseGrid";
 import {
   findAllCourses,
   createCourse,
-  deleteCourse
+  deleteCourse,
+  findCourseById,
+  updateCourse
 } from "../services/CourseService";
 import moment from "moment";
 import _ from "lodash";
@@ -23,7 +25,7 @@ class CourseManager extends Component {
 
   getCourses = () => {
     findAllCourses().then(courses => {
-      courses = _.sortBy(courses,'title')
+      courses = _.sortBy(courses, "title");
       this.setState({ courses: courses });
     });
   };
@@ -39,16 +41,35 @@ class CourseManager extends Component {
     createCourse(course).then(newCourse => {
       let courses = [...this.state.courses];
       courses.push(newCourse);
-      courses = _.sortBy(courses,'title')
-      if(this.state.order==='desc'){
-        courses.reverse()
+      courses = _.sortBy(courses, "title");
+      if (this.state.order === "desc") {
+        courses.reverse();
       }
       this.setState({ courses: courses });
     });
   };
 
+  updateCourse = course => {
+    updateCourse(course, course._id).then(() => {
+      const courses = [...this.state.courses];
+      const indexToUpdate = _.findIndex(courses, { _id: course._id });
+      course.lastModified = moment();
+      courses[indexToUpdate] = course;
+      this.setState({ courses: courses });
+    });
+  };
+  editCourse = (courseId, newTitle) => {
+    findCourseById(courseId).then(course => {
+      course.title = newTitle;
+      this.updateCourse(course);
+    });
+  };
+
   toggleOrder = () => {
-    this.setState({ order: this.state.order === "asc" ? "desc" : "asc",courses:this.state.courses.reverse() });
+    this.setState({
+      order: this.state.order === "asc" ? "desc" : "asc",
+      courses: this.state.courses.reverse()
+    });
   };
 
   toggleView = () => {
@@ -60,9 +81,9 @@ class CourseManager extends Component {
       let courses = [...this.state.courses];
       const indexToDelete = _.findIndex(courses, { _id: courseId });
       courses.splice(indexToDelete, 1);
-      courses = _.sortBy(courses,'title')
-      if(this.state.order==='desc'){
-        courses.reverse()
+      courses = _.sortBy(courses, "title");
+      if (this.state.order === "desc") {
+        courses.reverse();
       }
       this.setState({ courses: courses });
     });
@@ -72,35 +93,35 @@ class CourseManager extends Component {
     return (
       <>
         <NavBar title="Course Manager" onAddCourse={this.addCourse} />
-          <div className="row mx-0">
-            <div className="col-12" align="right">
-              {this.state.order === "asc" && (
-                <i
-                  className="fa fa-2x fa-sort-alpha-asc"
-                  onClick={this.toggleOrder}
-                ></i>
-              )}
-              {this.state.order === "desc" && (
-                <i
-                  className="fa fa-2x fa-sort-alpha-desc"
-                  onClick={this.toggleOrder}
-                ></i>
-              )}
-              {this.state.view === "list" && (
-                <i
-                  className="fa fa-2x fa-th mx-2 my-2"
-                  onClick={this.toggleView}
-                ></i>
-              )}
-              {this.state.view === "grid" && (
-                <i
-                  className="fa fa-2x fa-list mx-2 my-2"
-                  onClick={this.toggleView}
-                ></i>
-              )}
-            </div>
+        <div className="row mx-0">
+          <div className="col-12" align="right">
+            {this.state.order === "asc" && (
+              <i
+                className="fa fa-2x fa-sort-alpha-asc"
+                onClick={this.toggleOrder}
+              ></i>
+            )}
+            {this.state.order === "desc" && (
+              <i
+                className="fa fa-2x fa-sort-alpha-desc"
+                onClick={this.toggleOrder}
+              ></i>
+            )}
+            {this.state.view === "list" && (
+              <i
+                className="fa fa-2x fa-th mx-2 my-2"
+                onClick={this.toggleView}
+              ></i>
+            )}
+            {this.state.view === "grid" && (
+              <i
+                className="fa fa-2x fa-list mx-2 my-2"
+                onClick={this.toggleView}
+              ></i>
+            )}
           </div>
-        <div className={this.state.view==='list'?"container" : ""}>
+        </div>
+        <div className={this.state.view === "list" ? "container" : ""}>
           {this.state.courses === undefined && (
             <h4 className="text-center">Fetching Courses...</h4>
           )}
@@ -110,6 +131,7 @@ class CourseManager extends Component {
               courses={this.state.courses}
               deleteCourse={this.removeCourse}
               toggleEditor={this.props.toggleEditor}
+              editCourse={this.editCourse}
             />
           )}
           {this.state.courses !== undefined && this.state.view === "grid" && (
@@ -117,6 +139,7 @@ class CourseManager extends Component {
               courses={this.state.courses}
               deleteCourse={this.removeCourse}
               toggleEditor={this.props.toggleEditor}
+              editCourse={this.editCourse}
             />
           )}
         </div>

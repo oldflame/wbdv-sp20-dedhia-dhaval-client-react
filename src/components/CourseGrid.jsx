@@ -13,6 +13,7 @@ class CourseGrid extends Component {
               course={course}
               onDelete={this.props.deleteCourse}
               toggleEditor={this.props.toggleEditor}
+              editCourse={this.props.editCourse}
             />
           ))}
       </div>

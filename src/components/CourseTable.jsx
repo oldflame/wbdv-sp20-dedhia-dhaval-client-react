@@ -27,6 +27,7 @@ const CourseTable = props => {
               course={course}
               onDelete={props.deleteCourse}
               toggleEditor={props.toggleEditor}
+              editCourse={props.editCourse}
             />
           ))}
       </tbody>
