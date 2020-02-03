@@ -3,12 +3,12 @@ import './NavBarCourseEditor.css';
 
 const NavBarCourseEditor = props => {
   return (
-    <div classNameName="">
+    <div className="">
         <nav className="navbar navbar-bg navbar-color .navbar-text-color">
         <form className="form-inline">
             <div>
-                <a   onClick={props.toggleEditor} className="navbar-brand navbar-text-color" href="#">
-                    <i className="fa fa-times mr-3 wbdv-course-title wbdv-course-editor wbdv-close"></i>
+                <a    className="navbar-brand navbar-text-color" href="#">
+                    <i onClick={props.toggleEditor} className="fa fa-times mr-3 wbdv-course-title wbdv-course-editor wbdv-close"></i>
                     {props.title}
                 </a>
                 <a className="navbar-brand navbar-text-color ml-4" href="#">

@@ -2,14 +2,28 @@ import React, { Component } from "react";
 import ModuleList from "../components/ModuleList";
 import NavBarCourseEditor from "../components/NavBarCourseEditor";
 import "../components/CourseEditor.css";
+import { findCourseById } from "../services/CourseService";
 
 class CourseEditor extends Component {
-  state = {};
+  state = {
+    title: "WhiteBoard Course Editor"
+  };
+
+  componentDidMount(){
+    this.getCourseName()
+  }
+  getCourseName = () => {
+    findCourseById(this.props.courseId).then(course => {
+      this.setState({ title: "WhiteBoard Course Editor " + course.title });
+    });
+  };
   render() {
     return (
       <div>
-        <NavBarCourseEditor toggleEditor={this.props.toggleEditor} title="Dhaval "/>
-
+        <NavBarCourseEditor
+          toggleEditor={this.props.toggleEditor}
+          title={this.state.title}
+        />
 
         <div className="left-bar col-3 pt-3">
           <ModuleList moduleTitle="1 - jQuery" />

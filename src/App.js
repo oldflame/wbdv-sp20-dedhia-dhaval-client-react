@@ -10,13 +10,14 @@ class App extends Component {
     showCourseEditor: false
    }
 
-toggleEditor = () => {
-this.setState({showCourseEditor: !this.state.showCourseEditor})
+toggleEditor = (courseId) => {
+  this.setState({courseId:courseId})
+  this.setState({showCourseEditor: !this.state.showCourseEditor})
 }
 
   render() { 
     return ( 
-      this.state.showCourseEditor ? <CourseEditor toggleEditor={this.toggleEditor}/> : <CourseManager toggleEditor={this.toggleEditor}/>
+      this.state.showCourseEditor ? <CourseEditor toggleEditor={this.toggleEditor} courseId={this.state.courseId}/> : <CourseManager toggleEditor={this.toggleEditor}/>
       );
   }
 }
