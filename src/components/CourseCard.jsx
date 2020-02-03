@@ -8,7 +8,7 @@ class CourseCard extends Component {
     newCourseTitle: ""
   };
 
-  toogleEditMode = () => {
+  toggleEditMode = () => {
     console.log("Toggle cliecked")
     this.setState({ isEditable: !this.state.isEditable });
   };
@@ -19,7 +19,7 @@ class CourseCard extends Component {
 
   submitNewTitle = () => {
     this.props.editCourse(this.props.course._id, this.state.newCourseTitle);
-    this.toogleEditMode();
+    this.toggleEditMode();
   };
 
   render() {
@@ -59,8 +59,8 @@ class CourseCard extends Component {
                 aria-label="courseName"
                 onChange={this.onChangeUpdateCourse}
               />
-              <button type="button" className="btn btn-sm btn-danger mx-1" onClick={this.toogleEditMode}>Cancel</button>
-              <button type="button" className="btn btn-sm btn-success mx-1" onClick={this.submitNewTitle}>Save</button>
+              <button type="button" className="btn btn-sm btn-danger mx-1 my-1" onClick={this.toggleEditMode}>Cancel</button>
+              <button type="button" className="btn btn-sm btn-success mx-1 my-1" onClick={this.submitNewTitle}>Save</button>
             </div>
           )}
         </div>
