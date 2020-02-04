@@ -21,7 +21,7 @@ class NavBar extends Component {
             className=" course-title-input form-control mr-sm-2"
             type="search"
             value={this.state.courseTitle}
-            placeholder="Search"
+            placeholder="Enter Course Name"
             aria-label="Search"
             onChange={this.handleInputChange}
           />

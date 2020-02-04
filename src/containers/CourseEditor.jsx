@@ -4,6 +4,7 @@ import NavBarCourseEditor from "../components/NavBarCourseEditor";
 import "../components/CourseEditor.css";
 import { findCourseById } from "../services/CourseService";
 import Topic from "../components/Topic";
+import Widget from "../components/Widget";
 
 class CourseEditor extends Component {
   state = {
@@ -68,6 +69,7 @@ class CourseEditor extends Component {
                 </button>
               </div>
             </div>
+        <Widget/>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import moment from "moment";
+import './CourseRow.css';
 
 class CourseRow extends Component {
   state = {
@@ -23,8 +24,8 @@ class CourseRow extends Component {
   render() {
     return (
       <tr>
-        <td>
-          <div
+        <td className="title-td">
+          <div 
             className="pointer"
           >
             {!this.state.isEditable && <>

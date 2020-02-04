@@ -1,0 +1,32 @@
+
+.right-side {
+    background-color: white;
+    min-height: calc(100vh - 55px);
+}
+
+.round-btn {
+    border-radius: 10px !important;
+    border: none;
+}
+
+.plus-right {
+    float: right;
+
+}
+
+.container-display {
+    display: flex;
+}
+
+
+.small-select{
+    width: 65% !important;
+}
+
+.yellow-btn {
+    background-color: yellow !important;
+}
+
+.right-pull {
+    float: right;
+}
