@@ -10,6 +10,11 @@ class NavBar extends Component {
    handleInputChange = (event) => {
      this.setState({courseTitle : event.target.value})
    }
+
+   submitCourse = () => {
+    this.props.onAddCourse(this.state.courseTitle)
+    this.setState({courseTitle:''})
+   }
    
   render() { 
     return (
@@ -25,7 +30,7 @@ class NavBar extends Component {
             aria-label="Search"
             onChange={this.handleInputChange}
           />
-        <i className="plus-icon fa fa-2x fa-plus" onClick={()=>this.props.onAddCourse(this.state.courseTitle)}></i>
+        <i className="plus-icon fa fa-2x fa-plus" onClick={this.submitCourse}></i>
       </nav>
     </div>
       );
