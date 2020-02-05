@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NavBar from "../components/NavBarCourseEditorComponent";
+import NavBar from "../components/NavBarComponent";
 import CourseTable from "../components/CourseTableComponent";
 import CourseGrid from "../components/CourseGridComponent";
 import {
