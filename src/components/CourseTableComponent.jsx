@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CourseRow from "./CourseRow";
+import CourseRow from "./CourseRowComponent";
 import { deleteCourse } from "../services/CourseService";
 
 const CourseTable = props => {

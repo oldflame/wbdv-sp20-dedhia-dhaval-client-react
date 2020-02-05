@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import moment from "moment";
-import './CourseRow.css';
+import '../styles/CourseRow.css';
 
 class CourseRow extends Component {
   state = {

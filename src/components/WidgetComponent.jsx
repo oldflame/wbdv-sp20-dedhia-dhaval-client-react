@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Widget.css';
+import '../styles/Widget.css';
 
 class Widget extends Component {
     state = {  }

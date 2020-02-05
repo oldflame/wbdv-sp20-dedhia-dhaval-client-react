@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import NavBar from "../components/NavBar";
-import CourseTable from "../components/CourseTable";
-import CourseGrid from "../components/CourseGrid";
+import NavBar from "../components/NavBarCourseEditorComponent";
+import CourseTable from "../components/CourseTableComponent";
+import CourseGrid from "../components/CourseGridComponent";
 import {
   findAllCourses,
   createCourse,

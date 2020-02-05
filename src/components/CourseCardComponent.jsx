@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import moment from "moment";
-import "./CourseCard.css";
+import "../styles/CourseCard.css";
 
 class CourseCard extends Component {
   state = {

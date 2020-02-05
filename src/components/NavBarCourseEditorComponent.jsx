@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import './NavBarCourseEditor.css';
+import '../styles/NavBarCourseEditor.css';
 
 const NavBarCourseEditor = props => {
   return (

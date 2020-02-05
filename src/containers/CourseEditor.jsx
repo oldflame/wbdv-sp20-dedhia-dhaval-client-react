@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import ModuleList from "../components/ModuleList";
-import NavBarCourseEditor from "../components/NavBarCourseEditor";
-import "../components/CourseEditor.css";
+import ModuleList from "../components/ModuleListComponent";
+import NavBarCourseEditor from "../components/NavBarCourseEditorComponent";
+import "../styles/CourseEditor.css";
 import { findCourseById } from "../services/CourseService";
-import Topic from "../components/Topic";
-import Widget from "../components/Widget";
+import Topic from "../components/TopicComponent";
+import Widget from "../components/WidgetComponent";
 
 class CourseEditor extends Component {
   state = {
