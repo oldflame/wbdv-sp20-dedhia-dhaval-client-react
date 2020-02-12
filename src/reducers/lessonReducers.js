@@ -14,8 +14,9 @@ const lessonReducer = (state = initialState, action) => {
                 }))
             }
         case "CREATE_LESSON_FOR_MODULE":
+            //console.log(lesson)
             return {
-                lessons:[...state.lessons , action.newLesson]
+                lessons:[...state.lessons , action.lesson]
             }
         case "DELETE_LESSON_FOR_MODULE":
             const lessons = [...state.lessons]

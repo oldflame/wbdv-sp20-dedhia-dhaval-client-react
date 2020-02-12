@@ -2,7 +2,7 @@ const API_URL = "https://wbdv-generic-server.herokuapp.com/api/001835414/"
 
 
 export const createLesson = async (moduleId, lesson) => {
-    const response = await fetch(`${API_URL}/modules/${moduleId}/lessons`,{
+    const response = await fetch(`${API_URL}modules/${moduleId}/lessons`,{
         method : 'POST',
         body  :JSON.stringify(lesson),
         headers: {
@@ -19,7 +19,7 @@ export const findLessonsForModule = async (moduleId) => {
 }
 
 export const updateLesson = async (lessonId,lesson) => {
-    const response = await fetch(`${API_URL}/lessons/${lessonId}/`,{
+    const response = await fetch(`${API_URL}lessons/${lessonId}`,{
         method : 'PUT',
         body : JSON.stringify(lesson),
         headers : {
@@ -32,7 +32,7 @@ export const updateLesson = async (lessonId,lesson) => {
 
 
 export const deleteLesson = async (lessonId) => {
-    const response = await fetch(`${API_URL}/lessons/${lessonId}`,{
+    const response = await fetch(`${API_URL}lessons/${lessonId}`,{
         method : 'DELETE',
         headers : {
             'content-type' : 'application/json'
