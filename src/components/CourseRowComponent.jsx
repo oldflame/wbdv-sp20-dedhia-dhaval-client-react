@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import moment from "moment";
 import '../styles/CourseRow.css';
+import {Link} from "react-router-dom";
 
 class CourseRow extends Component {
   state = {
@@ -34,7 +35,9 @@ class CourseRow extends Component {
               width="50"
               className="mr-2"
             />
-            <span onClick={() => this.props.toggleEditor(this.props.course._id)}>{this.props.course.title}</span></>}
+            <Link to={`/course-editor/${this.props.course._id}`}>
+              <span>{this.props.course.title}</span>
+            </Link></>}
             {this.state.isEditable && (
               <input
                 className=" course-title-input form-control mr-sm-2"

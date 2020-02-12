@@ -3,21 +3,25 @@ import logo from './logo.svg';
 import './App.css';
 import CourseManager from './containers/CourseManager';
 import CourseEditor from './containers/CourseEditor';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 
 class App extends Component {
-  state = { 
-    showCourseEditor: false
-   }
-
-toggleEditor = (courseId) => {
-  this.setState({courseId:courseId})
-  this.setState({showCourseEditor: !this.state.showCourseEditor})
-}
-
   render() { 
     return ( 
-      this.state.showCourseEditor ? <CourseEditor toggleEditor={this.toggleEditor} courseId={this.state.courseId}/> : <CourseManager toggleEditor={this.toggleEditor}/>
+      <Router>
+        <Route path = "/course-editor/:courseId"
+        exact = {true}
+        render = {(props) => 
+          <CourseEditor {...props}
+          courseId = {props.match.params.courseId}/>
+        }/>
+          
+          <Route path = "/"
+          exact = {true}
+          render = {() => <CourseManager/>}
+          />
+      </Router>
       );
   }
 }

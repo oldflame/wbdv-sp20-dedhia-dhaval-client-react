@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import '../styles/NavBarCourseEditor.css';
+import { Link } from "react-router-dom";
 
 const NavBarCourseEditor = props => {
   return (
@@ -7,9 +8,10 @@ const NavBarCourseEditor = props => {
         <nav className="navbar navbar-bg navbar-color .navbar-text-color">
         <form className="form-inline">
             <div>
-                <a    className="navbar-brand navbar-text-color" href="#">
-                    <i onClick={props.toggleEditor} className="fa fa-times mr-3 wbdv-course-title wbdv-course-editor wbdv-close"></i>
-                    {props.title}
+                <a className="navbar-brand navbar-text-color" href="#">
+                    <Link to = "/">
+                    <i className="fa fa-times mr-3 wbdv-course-title wbdv-course-editor wbdv-close text-white"></i>
+                    </Link>Course Editor - {props.title}
                 </a>
                 <a className="navbar-brand navbar-text-color ml-4 navtabs" href="#">
                     Build
