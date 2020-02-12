@@ -11,7 +11,6 @@ class ModuleListComponent extends Component {
 
 
   componentDidMount() {
-    console.log("Find modules called")
     this.props.findModuleForCourse(this.props.courseId);
   }
 

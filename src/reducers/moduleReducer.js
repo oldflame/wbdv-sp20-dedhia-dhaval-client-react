@@ -39,7 +39,6 @@ const moduleReducer = (state = initialState, action) => {
             const indexToSelect = _.findIndex(modules2,{_id:action.moduleId})
             const updatedModule = {...modules2[indexToSelect], isSelected: true}
             modules2.splice(indexToSelect, 1, updatedModule);
-            console.log(modules2)
             return {
                 modules:_.cloneDeep(modules2)
             }

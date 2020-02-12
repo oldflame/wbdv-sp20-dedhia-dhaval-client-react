@@ -9,7 +9,6 @@ class CourseCard extends Component {
   };
 
   toggleEditMode = () => {
-    console.log("Toggle cliecked")
     this.setState({ isEditable: !this.state.isEditable });
   };
 

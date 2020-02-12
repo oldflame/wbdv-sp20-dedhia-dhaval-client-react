@@ -13,7 +13,7 @@ export const createLesson = async (moduleId, lesson) => {
 }
 
 export const findLessonsForModule = async (moduleId) => {
-    const response = await fetch(`${API_URL}/modules/${moduleId}/lessons`)
+    const response = await fetch(`${API_URL}modules/${moduleId}/lessons`)
         return await response.json()
 
 }

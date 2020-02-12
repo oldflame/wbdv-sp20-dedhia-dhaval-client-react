@@ -31,7 +31,6 @@ class CourseManager extends Component {
   };
 
   addCourse = courseTitle => {
-    console.log(courseTitle);
     const course = {
       title: courseTitle,
       owner: "Dhaval Dedhia",

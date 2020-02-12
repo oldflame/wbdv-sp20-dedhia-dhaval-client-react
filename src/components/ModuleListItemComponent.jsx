@@ -22,8 +22,7 @@ class ModuleListItemComponent extends Component {
 
   selectModule = () => {
     this.props.setSelectedModule(this.props.module._id)
-    console.log(this.props)
-    this.props.history.push(`/course-editor/${this.props.courseId}/module/${this.props.module._id}}`)
+    this.props.history.push(`/course-editor/${this.props.courseId}/module/${this.props.module._id}`)
   }
 
   render() {

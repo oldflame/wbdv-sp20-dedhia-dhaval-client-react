@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import lessonService from '../services/LessonService'
 
-class LessonListItemComponent extends Component {
+class LessonItemComponent extends Component {
     state = {  }
     
     
     render() { 
         return (  
-<div>
-  
-</div>
+            <a className="navbar-brand navbar-text-color" href="#">
+                    {this.props.lesson.title}
+                </a>
           );
     }
 }
@@ -42,6 +44,6 @@ const dispatchToPropertyMapper = dispatch => {
     };
   };
   
-  export default connect(null, dispatchToPropertyMapper)(LessonListItemComponent);
+  export default connect(null, dispatchToPropertyMapper)(LessonItemComponent);
   
 

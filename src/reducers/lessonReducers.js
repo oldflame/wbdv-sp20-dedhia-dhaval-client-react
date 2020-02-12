@@ -39,7 +39,6 @@ const lessonReducer = (state = initialState, action) => {
             const indexToSelect = _.findIndex(lessons2,{_id:action.lessonId})
             const updatedLesson = {...lessons2[indexToSelect], isSelected: true}
             lessons2.splice(indexToSelect, 1, updatedLesson);
-            console.log(lessons2)
             return {
                 lessons:_.cloneDeep(lessons2)
             }
