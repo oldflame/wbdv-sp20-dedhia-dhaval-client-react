@@ -36,6 +36,7 @@ export const updateModule = async (moduleId,module) => {
 
 
 export const deleteModule = async (moduleId) => {
+    console.log("in service", moduleId)
     const response = await fetch(`${API_URL}/${moduleId}`,{
         method : 'DELETE',
         headers : {

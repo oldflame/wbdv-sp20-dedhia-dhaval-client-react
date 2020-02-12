@@ -20,7 +20,7 @@ class ModuleListComponent extends Component {
 
   submitNewTitle = () => {
     this.props.createModule(this.props.courseId,this.state.moduleTitle)
-    this.setState({editEnabled:false})
+    this.setState({editEnabled:false,moduleTitle:""})
   }
 
   render() {
@@ -75,7 +75,6 @@ const dispatchToPropertyMapper = dispatch => {
         })),
 
     createModule : (courseId,moduleTitle) => {
-      console.log("hihijhi",moduleTitle)
         moduleService.createModule(courseId,{title:moduleTitle}).then(newModule => 
             dispatch({
                 type: "CREATE_MODULE_FOR_COURSE",

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 
 const initialState = {
 
@@ -12,6 +13,13 @@ const moduleReducer = (state = initialState, action) => {
         case "CREATE_MODULE_FOR_COURSE":
             return {
                 modules:[...state.modules , action.newModule]
+            }
+        case "DELETE_MODULE_FOR_COURSE":
+            const modules = [...state.modules]
+            const indexToDelete = _.findIndex(modules,{_id:action.moduleId})
+            modules.splice(indexToDelete,1)
+            return {
+                modules:modules
             }
         default:
             return state
