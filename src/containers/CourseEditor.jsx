@@ -9,10 +9,12 @@ import { combineReducers, createStore } from "redux";
 import moduleReducer from "../reducers/moduleReducer";
 import ModuleListComponent from '../components/ModuleListComponent'
 import '../styles/Modulecomponent.css'
+import lessonReducer from "../reducers/lessonReducers";
 
 class CourseEditor extends Component {
   rootReducer = combineReducers({
-    modules: moduleReducer
+    modules: moduleReducer,
+    lessons: lessonReducer
   });
 
   store = createStore(this.rootReducer);
@@ -32,7 +34,7 @@ class CourseEditor extends Component {
   render() {
     return (
       <Provider store={this.store}>
-        <NavBarCourseEditor courseTitle={this.state.title}/>
+        <NavBarCourseEditor courseTitle={this.state.title} courseId={this.props.courseId} moduleId={this.props.moduleId}/>
         <div className="row">
           <div className="col-3 left-bar">
             <ModuleListComponent courseId={this.props.courseId} history={this.props.history}/>

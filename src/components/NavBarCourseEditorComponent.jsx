@@ -30,5 +30,37 @@ class NavBarCourseEditorComponent extends Component {
         );
     }
 }
- 
-export default NavBarCourseEditorComponent
+
+const stateToPropertyMapper = state => {
+    return {
+      lessons: state.lessons.lessons
+    };
+  };
+
+const dispatchToPropertyMapper = dispatch => {
+    return {
+      deleteModuleForCourse: moduleId => {
+        moduleService.deleteModule(moduleId).then(
+          dispatch({
+            type: "DELETE_MODULE_FOR_COURSE",
+            moduleId: moduleId
+          })
+        );
+      },
+      updateModuleForCourse: (module) => {
+        moduleService.updateModule(module._id,module).then(
+          dispatch({
+            type: "UPDATE_MODULE_FOR_COURSE",
+            module: module
+          })
+        );
+      },
+      setSelectedModule: (moduleId) => {
+        dispatch({
+          type: "SET_SELECTED_MODULE",
+          moduleId:moduleId
+        })
+      }
+    };
+  };
+  export default connect(stateToPropertyMapper, dispatchToPropertyMapper)(NavBarCourseEditorComponent);
