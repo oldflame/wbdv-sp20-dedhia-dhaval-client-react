@@ -21,15 +21,21 @@ class LessonItemComponent extends Component {
     this.setState({editEnabled: false, lessonTitle: ""});
   }
 
+  selectLesson = () => {
+    this.props.setSelectedLesson(this.props.lesson._id)
+    this.props.history.push(`/course-editor/${this.props.courseId}/module/${this.props.moduleId}/lessons/${this.props.lesson._id}`);
+  }
+
   render() {
     return (
       <>
         {!this.state.editEnabled && (
           <a
-            className="navbar-brand navbar-text-color navtabs"
+            className={`navbar-brand navbar-text-color navtabs ${this.props.lesson.isSelected ? "active" : ""}`}
             href="#"
             onMouseEnter={() => this.setState({ showActions: true })}
             onMouseLeave={() => this.setState({ showActions: false })}
+            onClick={this.selectLesson}
           >
             {this.props.lesson.title}
             {this.state.showActions && (
