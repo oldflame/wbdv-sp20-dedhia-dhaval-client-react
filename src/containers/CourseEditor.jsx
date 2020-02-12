@@ -3,7 +3,6 @@ import ModuleList from "../components/ModuleListComponent";
 import NavBarCourseEditor from "../components/NavBarCourseEditorComponent";
 import "../styles/CourseEditor.css";
 import { findCourseById } from "../services/CourseService";
-import Topic from "../components/TopicComponent";
 import Widget from "../components/WidgetComponent";
 import { Provider } from "react-redux";
 import { combineReducers, createStore } from "redux";
