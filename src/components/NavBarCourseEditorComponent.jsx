@@ -11,23 +11,9 @@ const NavBarCourseEditor = props => {
                 <a className="navbar-brand navbar-text-color" href="#">
                     <Link to = "/">
                     <i className="fa fa-times mr-3 wbdv-course-title wbdv-course-editor wbdv-close text-white"></i>
-                    </Link>Course Editor - {props.title}
+                    </Link>{props.courseTitle}
                 </a>
-                <a className="navbar-brand navbar-text-color ml-4 navtabs" href="#">
-                    Build
-                </a>
-                <a className="navbar-brand navbar-text-color navtabs" href="#">
-                    <span className="mx-1">Pages</span>
-                </a>
-                <a className="navbar-brand navbar-text-color navtabs" href="#">
-                    Theme
-                </a>
-                <a className="navbar-brand navbar-text-color navtabs" href="#">
-                    Store
-                </a>
-                <a className="navbar-brand navbar-text-color navtabs" href="#">
-                    Apps
-                </a>
+                
                 <a className="navbar-brand navbar-text-color navtabs" href="#">
                     Settings
                 </a>

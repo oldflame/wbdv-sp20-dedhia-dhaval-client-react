@@ -23,7 +23,7 @@ export const findModule = async (moduleId) => {
 }
 
 export const updateModule = async (moduleId,module) => {
-    const response = await fetch(`${API_URL}/${moduleId}/modules`,{
+    const response = await fetch(`${API_URL}/${moduleId}/`,{
         method : 'PUT',
         body : JSON.stringify(module),
         headers : {

@@ -1,0 +1,5 @@
+.left-bar {
+    background-color: #b39ddb;
+    min-height: calc(100vh - 55px);
+}
+

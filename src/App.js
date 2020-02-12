@@ -21,6 +21,15 @@ class App extends Component {
           exact = {true}
           render = {() => <CourseManager/>}
           />
+
+          <Route path = "/course-editor/:courseId/module/:moduleId"
+          exact = {true}
+          render = {(props) =>
+          <CourseEditor {...props}
+          courseId = {props.match.params.courseId}
+          moduleId = {props.match.params.moduleId}
+          history = {props.history}
+          />}/>
       </Router>
       );
   }

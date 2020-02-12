@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71415436-1210-4565-86d2-ddf74fb02b66" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CourseRowComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseRowComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ModuleListComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ModuleListComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavBarCourseEditorComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavBarCourseEditorComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ModuleListItemComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ModuleListItemComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/CourseEditor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/CourseEditor.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/moduleReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/moduleReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/ModuleService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ModuleService.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

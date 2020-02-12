@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import { combineReducers, createStore } from "redux";
 import moduleReducer from "../reducers/moduleReducer";
 import ModuleListComponent from '../components/ModuleListComponent'
+import '../styles/Modulecomponent.css'
 
 class CourseEditor extends Component {
   rootReducer = combineReducers({
@@ -32,10 +33,10 @@ class CourseEditor extends Component {
   render() {
     return (
       <Provider store={this.store}>
-        <NavBarCourseEditor />
+        <NavBarCourseEditor courseTitle={this.state.title}/>
         <div className="row">
-          <div className="col-3">
-            <ModuleListComponent courseId={this.props.courseId}/>
+          <div className="col-3 left-bar">
+            <ModuleListComponent courseId={this.props.courseId} history={this.props.history}/>
             </div>
           <div className="col-9"></div>
         </div>
