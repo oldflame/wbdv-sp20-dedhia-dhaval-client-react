@@ -12,6 +12,7 @@ import '../styles/Modulecomponent.css'
 import lessonReducer from "../reducers/lessonReducers";
 import topicReducer from "../reducers/topicReducers";
 import TopicListComponent from "../components/TopicListComponent";
+import WidgetComponent from '../components/WidgetComponent';
 
 class CourseEditor extends Component {
   rootReducer = combineReducers({
@@ -49,6 +50,7 @@ class CourseEditor extends Component {
             </div>
           <div className="col-9">
             <TopicListComponent lessonId={this.props.lessonId} history={this.props.history}/>
+            <WidgetComponent />
 
           </div>
         </div>
