@@ -5,25 +5,29 @@ const initialState = {
 }
 
 const topicReducer = (state = initialState, action) => {
+    console.log("topic actions", action)
     switch(action.type){
         case "FIND_TOPICS_FOR_LESSON":
-            console.log("Lessons find", action.topics)
+            console.log("topics find", action.topics)
             return {
-                topics: action.topics.map(topic=>( {
+                topics: action.topics.map(topic=>({
                     ...topic,
                     isSelected: false
-                }))
+                })),
+                selectedLesson: state.selectedLesson
             }
         case "CREATE_TOPIC_FOR_LESSON":
             return {
-                topics:[...state.topics , action.topic]
+                topics:[...state.topics , action.topic],
+                selectedLesson: state.selectedLesson
             }
         case "DELETE_TOPIC_FOR_LESSON":
             const topics = [...state.topics]
             const indexToDelete = _.findIndex(topics,{_id:action.topicId})
             topics.splice(indexToDelete,1)
             return {
-                topics:topics
+                topics:topics,
+                selectedLesson: state.selectedLesson
             }
         case "UPDATE_TOPIC_FOR_LESSON":
             const topics1 = [...state.topics]
@@ -32,7 +36,8 @@ const topicReducer = (state = initialState, action) => {
             topicToUpdate = action.topic
             topics1.splice(indexToUpdate, 1, topicToUpdate);
             return {
-                topics:topics1
+                topics:topics1,
+                selectedLesson: state.selectedLesson
             }
         case "SET_SELECTED_TOPIC":
             const topics2 = [...state.topics]
@@ -41,8 +46,15 @@ const topicReducer = (state = initialState, action) => {
             const updatedLesson = {...topics2[indexToSelect], isSelected: true}
             topics2.splice(indexToSelect, 1, updatedLesson);
             return {
-                topics:_.cloneDeep(topics2)
+                topics:_.cloneDeep(topics2),
+                selectedLesson: state.selectedLesson
             }
+        case "SET_SELECTED_LESSON_FOR_TOPICS":
+            console.log("jugaad executed", action.lessonId)
+                return {
+                    topics: [...state.topics],
+                    selectedLesson: action.lessonId
+                }
         default:
             return state
     }

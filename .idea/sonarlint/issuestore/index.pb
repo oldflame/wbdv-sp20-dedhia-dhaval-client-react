@@ -9,3 +9,5 @@
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 M
 src/services/CourseService.js,1\3\134b94d760aa1da497d64432dfd6212a6239ede0
+V
+&src/components/CourseCardComponent.jsx,1\6\167d34c07f6664839f0086b9568cea6cbc2b70e3

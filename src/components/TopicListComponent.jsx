@@ -15,7 +15,7 @@ class TopicListComponent extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.lessonId != this.props.lessonId)
+    if (prevProps.selectedLesson != this.props.selectedLesson)
       this.props.findTopicsForLessons(this.props.lessonId);
   }
 
@@ -24,7 +24,7 @@ class TopicListComponent extends Component {
   };
 
   submitTopic = () => {
-    this.props.createTopicForLesson(this.props.lessonId, {
+    this.props.createTopicForLesson(this.props.selectedLesson, {
       title: this.state.topicTitle,
       isSelected: false
     });
@@ -71,8 +71,10 @@ class TopicListComponent extends Component {
 }
 
 const stateToPropertyMapper = state => {
+  console.log("Jugaad id", state.topics.selectedLesson)
   return {
-    topics: state.topics.topics
+    topics: state.topics.topics,
+    selectedLesson: state.topics.selectedLesson
   };
 };
 
@@ -87,6 +89,7 @@ const dispatchToPropertyMapper = dispatch => {
       });
     },
     createTopicForLesson: (lessonId, topic) => {
+      console.log("Creating topic", lessonId)
       topicService.createTopic(lessonId, topic).then(topic => {
         dispatch({
           type: "CREATE_TOPIC_FOR_LESSON",

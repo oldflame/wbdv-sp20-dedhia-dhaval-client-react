@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import lessonService from "../services/LessonService";
+import topicService from "../services/TopicService";
 import "../styles/NavBarCourseEditor.css";
 
 class LessonItemComponent extends Component {
@@ -24,6 +25,8 @@ class LessonItemComponent extends Component {
   selectLesson = () => {
     this.props.setSelectedLesson(this.props.lesson._id)
     //this.props.history.push(`/course-editor/${this.props.courseId}/module/${this.props.moduleId}/lessons/${this.props.lesson._id}`);
+    this.props.getTopicsForLesson(this.props.lesson._id)
+    this.props.setSelectedLessonForTopic(this.props.lesson._id);
   }
 
   render() {
@@ -33,7 +36,7 @@ class LessonItemComponent extends Component {
           <a
             className={`navbar-brand navbar-text-color navtabs ${this.props.lesson.isSelected ? "active" : ""}`}
             href="#"
-            onMouseEnter={() => this.setState({ showActions: true })}
+            onMouseOver={() => this.setState({ showActions: true })}
             onMouseLeave={() => this.setState({ showActions: false })}
             onClick={this.selectLesson}
           >
@@ -94,6 +97,20 @@ const dispatchToPropertyMapper = dispatch => {
     setSelectedLesson: lessonId => {
       dispatch({
         type: "SET_SELECTED_LESSON",
+        lessonId: lessonId
+      });
+    },
+    getTopicsForLesson: (lessonId) => {
+      topicService.findTopicsForLesson(lessonId).then(topics => {
+        dispatch({
+          type: "FIND_TOPICS_FOR_LESSON",
+          topics: topics
+        })
+      })
+    },
+    setSelectedLessonForTopic: lessonId => {
+      dispatch({
+        type: "SET_SELECTED_LESSON_FOR_TOPICS",
         lessonId: lessonId
       });
     }
