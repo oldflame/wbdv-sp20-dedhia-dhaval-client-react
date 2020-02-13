@@ -12,7 +12,7 @@ import '../styles/Modulecomponent.css'
 import lessonReducer from "../reducers/lessonReducers";
 import topicReducer from "../reducers/topicReducers";
 import TopicListComponent from "../components/TopicListComponent";
-import WidgetComponent from '../components/WidgetComponent';
+import WidgetComponent from '../components/WidgetComponent';  
 
 class CourseEditor extends Component {
   rootReducer = combineReducers({
