@@ -3,13 +3,18 @@ import { connect } from "react-redux";
 import topicService from '../services/TopicService'
 
 class TopicListItemComponent extends Component {
-    state = {  }
+    state = { 
+      editEnabled:false,
+      newTopicTitle : ""
+     }
     
     
     render() { 
         return (  
 <div>
-
+{/* <button>
+  {this.state.}
+</button> */}
 </div>
           );
     }

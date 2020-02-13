@@ -15,12 +15,14 @@ class NavBarCourseEditorComponent extends Component {
   };
 
   componentDidMount() {
-    this.props.findLessonsForModules(this.props.moduleId);
+    if(this.props.moduleId!= undefined)
+      this.props.findLessonsForModules(this.props.moduleId);
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.moduleId != this.props.moduleId)
+    if (prevProps.moduleId != this.props.moduleId) {
       this.props.findLessonsForModules(this.props.moduleId);
+    }
   }
 
   handleLessonChange = event => {
@@ -97,10 +99,12 @@ class NavBarCourseEditorComponent extends Component {
 }
 
 const stateToPropertyMapper = state => {
+  console.log(state.lessons)
   return {
     lessons: state.lessons.lessons
   };
 };
+
 const dispatchToPropertyMapper = dispatch => {
   return {
     findLessonsForModules: moduleId => {
@@ -121,6 +125,7 @@ const dispatchToPropertyMapper = dispatch => {
     }
   };
 };
+
 export default connect(
   stateToPropertyMapper,
   dispatchToPropertyMapper

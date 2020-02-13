@@ -10,11 +10,14 @@ import moduleReducer from "../reducers/moduleReducer";
 import ModuleListComponent from '../components/ModuleListComponent'
 import '../styles/Modulecomponent.css'
 import lessonReducer from "../reducers/lessonReducers";
+import topicReducer from "../reducers/topicReducers";
+import TopicListComponent from "../components/TopicListComponent";
 
 class CourseEditor extends Component {
   rootReducer = combineReducers({
     modules: moduleReducer,
-    lessons: lessonReducer
+    lessons: lessonReducer,
+    topics: topicReducer
   });
 
   store = createStore(this.rootReducer);
@@ -23,7 +26,12 @@ class CourseEditor extends Component {
     title: "WhiteBoard Course Editor"
   };
 
+  shouldComponentUpdate(){
+    return this.props.lessonId==undefined;
+  }
+
   componentDidMount() {
+    console.log("In CourseEditor")
     this.getCourseName();
   }
   getCourseName = () => {
@@ -39,7 +47,10 @@ class CourseEditor extends Component {
           <div className="col-3 left-bar">
             <ModuleListComponent courseId={this.props.courseId} history={this.props.history}/>
             </div>
-          <div className="col-9"></div>
+          <div className="col-9">
+            <TopicListComponent lessonId={this.props.lessonId} history={this.props.history}/>
+
+          </div>
         </div>
       </Provider>
     );

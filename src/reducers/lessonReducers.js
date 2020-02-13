@@ -5,8 +5,10 @@ const initialState = {
 }
 
 const lessonReducer = (state = initialState, action) => {
+    console.log("sihjifidsj",action)
     switch(action.type){
         case "FIND_LESSONS_FOR_MODULE":
+            console.log("Lessons find", action.lessons)
             return {
                 lessons: action.lessons.map(lesson=>( {
                     ...lesson,
@@ -14,7 +16,6 @@ const lessonReducer = (state = initialState, action) => {
                 }))
             }
         case "CREATE_LESSON_FOR_MODULE":
-            //console.log(lesson)
             return {
                 lessons:[...state.lessons , action.lesson]
             }

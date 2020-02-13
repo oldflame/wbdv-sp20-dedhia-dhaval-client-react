@@ -30,7 +30,7 @@ class App extends Component {
           moduleId = {props.match.params.moduleId}
           history = {props.history}
           />}/>
-
+    
           <Route path = "/course-editor/:courseId/module/:moduleId/lessons/:lessonId"
           exact = {true}
           render = {(props) => 

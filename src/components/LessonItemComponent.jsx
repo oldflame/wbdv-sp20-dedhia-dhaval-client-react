@@ -23,7 +23,7 @@ class LessonItemComponent extends Component {
 
   selectLesson = () => {
     this.props.setSelectedLesson(this.props.lesson._id)
-    this.props.history.push(`/course-editor/${this.props.courseId}/module/${this.props.moduleId}/lessons/${this.props.lesson._id}`);
+    //this.props.history.push(`/course-editor/${this.props.courseId}/module/${this.props.moduleId}/lessons/${this.props.lesson._id}`);
   }
 
   render() {
