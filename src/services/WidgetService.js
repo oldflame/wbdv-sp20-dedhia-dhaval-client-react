@@ -1,7 +1,7 @@
-const API_URL = "https://localhost:8080/api/"
+const API_URL = "http://localhost:8080/api/"
 
 
-export const createWidget = async (widgetId, widget) => {
+export const createWidget = async (topicId, widget) => {
     const response = await fetch(`${API_URL}topics/${topicId}/widgets`,{
         method : 'POST',
         body  :JSON.stringify(widget),

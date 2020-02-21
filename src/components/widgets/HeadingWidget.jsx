@@ -1,26 +1,27 @@
 import React, { Component } from "react";
 import "../../styles/Widget.css";
+import WidgetService from "../../services/WidgetService";
+import { connect } from "react-redux";
+
 
 class HeadingWidget extends Component {
   state = {
-      heading:"",
-      size:"",
-      widgetName:""
+    headingText: "",
+    size: "",
+    widgetName: ""
   };
 
-    handleHeadingChange = event => {
-      this.setState({heading: event.target.value})
-  }
+  handleHeadingTextChange = event => {
+    this.setState({ headingText: event.target.value });
+  };
 
-    handleSizeChange = event => {
-    this.setState({size: event.target.value})
-}
+  handleSizeChange = event => {
+    this.setState({ size: event.target.value });
+  };
 
-    handleWidgetNameChange = event => {
-    this.setState({heading: event.target.value})
-}
-
-
+  handleWidgetNameChange = event => {
+    this.setState({ widgetName: event.target.value });
+  };
 
   render() {
     return (
@@ -51,7 +52,7 @@ class HeadingWidget extends Component {
                   <option selected>Heading</option>
                   <option value="slides">Paragraph</option>
                 </select>
-                <button type="button" className="btn btn-danger">
+                <button type="button" className="btn btn-danger" onClick={this.props.deleteWidget}>
                   <i className="fa fa-times"></i>
                 </button>
               </div>
@@ -76,10 +77,10 @@ class HeadingWidget extends Component {
                 placeholder="Widget Name"
               />
               <div className="offset-11 col-1">
-              <button type="button" className="btn btn-success">
-                Save
-              </button>
-            </div>
+                <button type="button" className="btn btn-success">
+                  Save
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -87,5 +88,25 @@ class HeadingWidget extends Component {
     );
   }
 }
+const stateToPropertyMapper = state => {
+  return {
+    widgets: state.widgets.widgets
+  };
+};
 
-export default HeadingWidget;
+const dispatchToPropertyMapper = dispatch => {
+  return {
+    deleteWidget: widgetId => {
+      WidgetService.deleteWidget(widgetId).then(
+        dispatch({
+          type: "DELETE_WIDGET_FOR_TOPIC",
+          widgetId: widgetId
+        })
+      );
+    }
+  };
+};
+export default connect(
+    stateToPropertyMapper,
+    dispatchToPropertyMapper
+  ) (HeadingWidget);

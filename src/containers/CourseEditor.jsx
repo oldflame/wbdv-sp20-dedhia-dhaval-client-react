@@ -12,12 +12,14 @@ import lessonReducer from "../reducers/lessonReducers";
 import topicReducer from "../reducers/topicReducers";
 import TopicListComponent from "../components/TopicListComponent";
 import WidgetListComponent from "../components/widgets/WidgetListComponent";
+import widgetReducer from "../reducers/widgetReducer";
 
 class CourseEditor extends Component {
   rootReducer = combineReducers({
     modules: moduleReducer,
     lessons: lessonReducer,
-    topics: topicReducer
+    topics: topicReducer,
+    widgets: widgetReducer
   });
 
   store = createStore(this.rootReducer);
