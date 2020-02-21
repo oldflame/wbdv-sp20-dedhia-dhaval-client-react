@@ -44,7 +44,7 @@ class CourseEditor extends Component {
   render() {
     return (
       <Provider store={this.store}>
-        <NavBarCourseEditor courseTitle={this.state.title} courseId={this.props.courseId} moduleId={this.props.moduleId} history={this.props.history}/>
+        <NavBarCourseEditor courseTitle={this.state.title} courseId={this.props.courseId} moduleId={this.props.moduleId} lessonId={this.props.lessonId} history={this.props.history}/>
         <div className="row">
           <div className="col-3 left-bar">
             <ModuleListComponent courseId={this.props.courseId} moduleId={this.props.moduleId} history={this.props.history}/>

@@ -8,7 +8,8 @@ class LessonItemComponent extends Component {
   state = {
     showActions: false,
     editEnabled: false,
-    lessonTitle: ""
+    lessonTitle: "",
+    isSelected: false
   };
 
   handleLessonChange = event => {
@@ -16,17 +17,31 @@ class LessonItemComponent extends Component {
   };
 
   submitLesson = () => {
-    const lesson = {...this.props.lesson}
+    const lesson = { ...this.props.lesson };
     lesson.title = this.state.lessonTitle;
     this.props.updateLessonForModule(lesson);
-    this.setState({editEnabled: false, lessonTitle: ""});
-  }
+    this.setState({ editEnabled: false, lessonTitle: "" });
+  };
 
   selectLesson = () => {
-    //this.props.setSelectedLesson(this.props.lesson._id)
-    this.props.history.push(`/course-editor/${this.props.courseId}/module/${this.props.moduleId}/lessons/${this.props.lesson._id}`);
-    //this.props.getTopicsForLesson(this.props.lesson._id)
-    //this.props.setSelectedLessonForTopic(this.props.lesson._id);
+    this.props.history.push(
+      `/course-editor/${this.props.courseId}/module/${this.props.moduleId}/lessons/${this.props.lesson._id}`
+    );
+  };
+
+  componentDidUpdate() {
+    if (
+      this.state.isSelected !=
+      (this.props.lesson._id == this.props.lessonId)
+    ) {
+      this.setState({
+        isSelected: this.props.lesson._id == this.props.lessonId
+      });
+    }
+  }
+
+  componentDidMount() {
+    this.setState({ isSelected: this.props.lesson._id == this.props.lessonId });
   }
 
   render() {
@@ -34,7 +49,9 @@ class LessonItemComponent extends Component {
       <>
         {!this.state.editEnabled && (
           <a
-            className={`navbar-brand navbar-text-color navtabs ${this.props.lesson.isSelected ? "active" : ""}`}
+            className={`navbar-brand navbar-text-color navtabs ${
+              this.state.isSelected ? "active" : ""
+            }`}
             href="#"
             onMouseOver={() => this.setState({ showActions: true })}
             onMouseLeave={() => this.setState({ showActions: false })}
@@ -43,8 +60,16 @@ class LessonItemComponent extends Component {
             {this.props.lesson.title}
             {this.state.showActions && (
               <>
-                <i className="fa fa-pencil mx-1 text-info" onClick={() => this.setState({editEnabled: true})}></i>
-                <i className="fa fa-times-circle mx-1 text-danger" onClick={() => this.props.deleteLessonForModule(this.props.lesson._id)}></i>
+                <i
+                  className="fa fa-pencil mx-1 text-info"
+                  onClick={() => this.setState({ editEnabled: true })}
+                ></i>
+                <i
+                  className="fa fa-times-circle mx-1 text-danger"
+                  onClick={() =>
+                    this.props.deleteLessonForModule(this.props.lesson._id)
+                  }
+                ></i>
               </>
             )}
           </a>
@@ -65,7 +90,7 @@ class LessonItemComponent extends Component {
               <i
                 className="fa fa-times wbdv-module-item-delete-btn mx-1 text-danger"
                 onClick={() =>
-                  this.setState({lessonTitle: "", editEnabled: false})
+                  this.setState({ lessonTitle: "", editEnabled: false })
                 }
               ></i>
             </span>
@@ -100,18 +125,12 @@ const dispatchToPropertyMapper = dispatch => {
         lessonId: lessonId
       });
     },
-    getTopicsForLesson: (lessonId) => {
+    getTopicsForLesson: lessonId => {
       topicService.findTopicsForLesson(lessonId).then(topics => {
         dispatch({
           type: "FIND_TOPICS_FOR_LESSON",
           topics: topics
-        })
-      })
-    },
-    setSelectedLessonForTopic: lessonId => {
-      dispatch({
-        type: "SET_SELECTED_LESSON_FOR_TOPICS",
-        lessonId: lessonId
+        });
       });
     }
   };

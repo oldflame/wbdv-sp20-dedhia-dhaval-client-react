@@ -57,6 +57,7 @@ class NavBarCourseEditorComponent extends Component {
                     key={lesson._id}
                     courseId={this.props.courseId}
                     moduleId={this.props.moduleId}
+                    lessonId= {this.props.lessonId}
                     history={this.props.history}
                   />
                 ))}
