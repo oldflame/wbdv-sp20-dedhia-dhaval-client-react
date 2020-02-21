@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import "../../styles/Widget.css";
 import WidgetService from "../../services/WidgetService";
 import { connect } from "react-redux";
-
+import _ from 'lodash';
 
 class HeadingWidget extends Component {
   state = {
     headingText: "",
     size: "",
-    widgetName: ""
+    widgetName: "",
   };
 
   handleHeadingTextChange = event => {
@@ -22,6 +22,27 @@ class HeadingWidget extends Component {
   handleWidgetNameChange = event => {
     this.setState({ widgetName: event.target.value });
   };
+
+  handleTypeChange = event => {
+    const widget = _.cloneDeep(this.props.widget)
+    
+    if (event.target.value ==  "HEADING") {
+      widget.type = event.target.value;
+      widget.name = "Heading Widget"
+      widget.text = "Heading Text"
+    }
+    
+    
+    if (event.target.value ==  "PARAGRAPH") {
+      widget.type = event.target.value;
+      widget.name = "Paragraph Widget"
+      widget.text = "Paragraph Text"
+    }
+    
+    console.log("type change", event.target.value, widget)
+
+    this.props.updateWidgetForTopic(widget)
+  }
 
   render() {
     return (
@@ -46,11 +67,12 @@ class HeadingWidget extends Component {
                   <i className="fa fa-arrow-down"></i>
                 </button>
                 <select
+                  onChange={this.handleTypeChange}
                   className="custom-select small-select"
                   id="inputGroupSelect01"
                 >
-                  <option selected>Heading</option>
-                  <option value="slides">Paragraph</option>
+                  <option value="HEADING" selected>Heading</option>
+                  <option value="PARAGRAPH">Paragraph</option>
                 </select>
                 <button type="button" className="btn btn-danger" onClick={this.props.deleteWidget}>
                   <i className="fa fa-times"></i>
@@ -103,7 +125,16 @@ const dispatchToPropertyMapper = dispatch => {
           widgetId: widgetId
         })
       );
-    }
+    },
+    updateWidgetForTopic: (widget) => {
+      console.log("Updating", widget)
+      WidgetService.updateWidget(widget.id,widget).then(
+        dispatch({
+          type:"UPDATE_WIDGET_FOR_TOPIC",
+          widget:widget
+        })
+      );  
+    },
   };
 };
 export default connect(

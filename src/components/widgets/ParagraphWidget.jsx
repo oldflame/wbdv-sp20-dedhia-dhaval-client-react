@@ -1,9 +1,14 @@
 import React, { Component } from "react";
+import WidgetService from "../../services/WidgetService";
+import { connect } from "react-redux";
+import "../../styles/Widget.css";
+
+import _ from 'lodash';
 
 class ParagraphWidget extends Component {
   state = {
       paragraphText: "",
-      widgetName: ""
+      widgetName: "",
   };
 
   handleParagraphChange = event => {
@@ -12,6 +17,27 @@ class ParagraphWidget extends Component {
 
   handleWidgetNameChange = event => {
       this.setState({widgetName: event.target.value})
+  }
+
+  handleTypeChange = event => {
+    const widget = _.cloneDeep(this.props.widget)
+    
+    if (event.target.value ==  "HEADING") {
+      widget.type = event.target.value;
+      widget.name = "Heading Widget"
+      widget.text = "Heading Text"
+    }
+    
+    
+    if (event.target.value ==  "PARAGRAPH") {
+      widget.type = event.target.value;
+      widget.name = "Paragraph Widget"
+      widget.text = "Paragraph Text"
+    }
+    
+    console.log("type change", event.target.value, widget)
+
+    this.props.updateWidgetForTopic(widget)
   }
 
   render() {
@@ -38,12 +64,12 @@ class ParagraphWidget extends Component {
                 </button>
                 <select
                   className="custom-select small-select"
-                  id="inputGroupSelect01"
+                  id="inputGroupSelect01" onChange={this.handleTypeChange}
                 >
-                  <option selected>Paragraph</option>
-                  <option value="slides">Heading</option>
+                  <option value="HEADING">Heading</option>
+                  <option selected value="PARAGRAPH">Paragraph</option>
                 </select>
-                <button type="button" className="btn btn-danger">
+                <button type="button" className="btn btn-danger" onClick={this.props.deleteWidget}>
                   <i className="fa fa-times"></i>
                 </button>
               </div>
@@ -74,4 +100,35 @@ class ParagraphWidget extends Component {
   }
 }
 
-export default ParagraphWidget;
+const stateToPropertyMapper = state => {
+  return {
+    widgets: state.widgets.widgets
+  };
+};
+
+const dispatchToPropertyMapper = dispatch => {
+  return {
+    deleteWidget: widgetId => {
+      WidgetService.deleteWidget(widgetId).then(
+        dispatch({
+          type: "DELETE_WIDGET_FOR_TOPIC",
+          widgetId: widgetId
+        })
+      );
+    },
+    updateWidgetForTopic: (widget) => {
+      console.log("Updating", widget)
+      WidgetService.updateWidget(widget.id,widget).then(
+        dispatch({
+          type:"UPDATE_WIDGET_FOR_TOPIC",
+          widget:widget
+        })
+      );  
+    },
+  };
+};
+export default connect(
+    stateToPropertyMapper,
+    dispatchToPropertyMapper
+  ) (ParagraphWidget);
+

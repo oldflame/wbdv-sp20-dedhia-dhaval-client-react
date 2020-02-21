@@ -18,8 +18,8 @@ class WidgetListComponent extends Component {
       <div>
         {this.props.widgets.map(widget => (
           <>
-            {widget.type === "HEADING" && <HeadingWidget />}
-            {widget.type === "PARAGRAPH" && <ParagraphWidget />}
+            {widget.type === "HEADING" && <HeadingWidget widget={widget} />}
+            {widget.type === "PARAGRAPH" && <ParagraphWidget widget={widget} />}
           </>
         ))}
         {/* <ParagraphWidget /> */}
