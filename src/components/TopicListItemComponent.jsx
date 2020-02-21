@@ -6,7 +6,8 @@ class TopicListItemComponent extends Component {
   state = {
     editEnabled: false,
     newTopicTitle: "",
-    showActions: false
+    showActions: false,
+    isSelected: false
   };
 
   handleTopicChange = (event) => {
@@ -24,11 +25,27 @@ class TopicListItemComponent extends Component {
     this.props.history.push(`/course-editor/${this.props.courseId}/module/${this.props.moduleId}/lessons/${this.props.lessonId}/topics/${this.props.topic._id}`)
   }
 
+  componentDidMount(){
+    this.setState({ isSelected: this.props.topic._id == this.props.topicId });
+
+  }
+
+  componentDidUpdate(){
+    if (
+      this.state.isSelected !=
+      (this.props.topic._id == this.props.topicId)
+    ) {
+      this.setState({
+        isSelected: this.props.topic._id == this.props.topicId
+      });
+    }
+  }
+
   render() {
     return (
       <>
           <button
-            className="btn btn-outline-dark m-2"
+            className={`btn ${this.state.isSelected ? 'btn-dark' : 'btn-outline-dark' } m-2`}
             onMouseOver={() => this.setState({ showActions: true })}
             onMouseLeave={() => this.setState({ showActions: false })}
             onClick={this.setSelectedTopic}

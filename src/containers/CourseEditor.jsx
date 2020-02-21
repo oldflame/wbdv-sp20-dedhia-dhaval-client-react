@@ -50,7 +50,7 @@ class CourseEditor extends Component {
             <ModuleListComponent courseId={this.props.courseId} moduleId={this.props.moduleId} history={this.props.history}/>
             </div>
           <div className="col-9">
-            <TopicListComponent lessonId={this.props.lessonId} courseId={this.props.courseId} moduleId={this.props.moduleId} history={this.props.history}/>
+            <TopicListComponent lessonId={this.props.lessonId} courseId={this.props.courseId} moduleId={this.props.moduleId} topicId={this.props.topicId} history={this.props.history}/>
             <WidgetListComponent topicId={this.props.topicId}/>
 
           </div>

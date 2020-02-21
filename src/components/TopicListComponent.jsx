@@ -37,7 +37,7 @@ class TopicListComponent extends Component {
       <div className="m-2">
         {this.props.topics &&
           this.props.topics.map(topic => (
-            <TopicListItemComponent topic={topic} key={topic._id} courseId={this.props.courseId} moduleId={this.props.moduleId} lessonId={this.props.lessonId} history={this.props.history} />
+            <TopicListItemComponent topic={topic} key={topic._id} courseId={this.props.courseId} moduleId={this.props.moduleId} lessonId={this.props.lessonId} topicId={this.props.topicId} history={this.props.history} />
           ))}
 
         {this.state.showInputField && (
