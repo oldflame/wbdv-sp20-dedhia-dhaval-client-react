@@ -99,7 +99,6 @@ class NavBarCourseEditorComponent extends Component {
 }
 
 const stateToPropertyMapper = state => {
-  console.log(state.lessons)
   return {
     lessons: state.lessons.lessons
   };

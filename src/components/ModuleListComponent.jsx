@@ -10,7 +10,6 @@ class ModuleListComponent extends Component {
   };
 
   componentDidMount() {
-    console.log("Module Mounted");
     this.props.findModuleForCourse(this.props.courseId);
   }
 

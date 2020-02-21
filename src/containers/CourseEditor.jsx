@@ -28,13 +28,13 @@ class CourseEditor extends Component {
     title: "WhiteBoard Course Editor"
   };
 
-  shouldComponentUpdate(){
-    return this.props.lessonId==undefined;
+  componentDidMount() {
+    this.getCourseName();
   }
 
-  componentDidMount() {
-    console.log("In CourseEditor")
-    this.getCourseName();
+  componentDidUpdate(prevProps){
+    if(prevProps.courseId != this.props.courseId)
+      this.getCourseName()
   }
   getCourseName = () => {
     findCourseById(this.props.courseId).then(course => {
@@ -50,8 +50,8 @@ class CourseEditor extends Component {
             <ModuleListComponent courseId={this.props.courseId} history={this.props.history}/>
             </div>
           <div className="col-9">
-            <TopicListComponent lessonId={this.props.lessonId} history={this.props.history}/>
-            <WidgetListComponent />
+            <TopicListComponent lessonId={this.props.lessonId} courseId={this.props.courseId} moduleId={this.props.moduleId} history={this.props.history}/>
+            <WidgetListComponent topicId={this.props.topicId}/>
 
           </div>
         </div>

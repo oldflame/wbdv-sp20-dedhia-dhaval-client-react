@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 const HeadingPreviewComponent = props => {
-    console.log("in preview",props.widget)
   return (
     <div>
       {props.widget.size == "1" && <h1>{props.widget.text}</h1>}

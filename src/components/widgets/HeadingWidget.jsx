@@ -19,17 +19,14 @@ class HeadingWidget extends Component {
   } 
 
   handleHeadingTextChange = event => {
-    console.log(event.target.value)
     this.setState({ text: event.target.value });
   };
 
   handleSizeChange = event => {
-    console.log(event.target.value)
     this.setState({ size: event.target.value });
   };
 
   handleWidgetNameChange = event => {
-    console.log(event.target.value)
     this.setState({ name: event.target.value });
   };
 
@@ -57,7 +54,6 @@ class HeadingWidget extends Component {
       widget.text = "Paragraph Text"
     }
     
-    console.log("type change", event.target.value, widget)
 
     this.props.updateWidgetForTopic(widget)
   }
@@ -149,7 +145,6 @@ const dispatchToPropertyMapper = dispatch => {
       );
     },
     updateWidgetForTopic: (widget) => {
-      console.log("Updating", widget)
       WidgetService.updateWidget(widget.id,widget).then(
         dispatch({
           type:"UPDATE_WIDGET_FOR_TOPIC",

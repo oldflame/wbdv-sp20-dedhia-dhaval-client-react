@@ -15,9 +15,10 @@ class TopicListComponent extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.selectedLesson != this.props.selectedLesson)
+
+    if (prevProps.lessonId != this.props.lessonId){
       this.props.findTopicsForLessons(this.props.lessonId);
-  }
+  }}
 
   handleTopicChange = event => {
     this.setState({ topicTitle: event.target.value });
@@ -36,7 +37,7 @@ class TopicListComponent extends Component {
       <div className="m-2">
         {this.props.topics &&
           this.props.topics.map(topic => (
-            <TopicListItemComponent topic={topic} key={topic._id} />
+            <TopicListItemComponent topic={topic} key={topic._id} courseId={this.props.courseId} moduleId={this.props.moduleId} lessonId={this.props.lessonId} history={this.props.history} />
           ))}
 
         {this.state.showInputField && (
@@ -71,7 +72,6 @@ class TopicListComponent extends Component {
 }
 
 const stateToPropertyMapper = state => {
-  console.log("Jugaad id", state.topics.selectedLesson)
   return {
     topics: state.topics.topics,
     selectedLesson: state.topics.selectedLesson
@@ -89,7 +89,6 @@ const dispatchToPropertyMapper = dispatch => {
       });
     },
     createTopicForLesson: (lessonId, topic) => {
-      console.log("Creating topic", lessonId)
       topicService.createTopic(lessonId, topic).then(topic => {
         dispatch({
           type: "CREATE_TOPIC_FOR_LESSON",
