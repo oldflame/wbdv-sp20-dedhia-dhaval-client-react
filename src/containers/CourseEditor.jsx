@@ -3,7 +3,6 @@ import ModuleList from "../components/ModuleListComponent";
 import NavBarCourseEditor from "../components/NavBarCourseEditorComponent";
 import "../styles/CourseEditor.css";
 import { findCourseById } from "../services/CourseService";
-import Widget from "../components/WidgetComponent";
 import { Provider } from "react-redux";
 import { combineReducers, createStore } from "redux";
 import moduleReducer from "../reducers/moduleReducer";
@@ -12,7 +11,7 @@ import '../styles/Modulecomponent.css'
 import lessonReducer from "../reducers/lessonReducers";
 import topicReducer from "../reducers/topicReducers";
 import TopicListComponent from "../components/TopicListComponent";
-import WidgetComponent from '../components/WidgetComponent';  
+import WidgetListComponent from "../components/widgets/WidgetListComponent";
 
 class CourseEditor extends Component {
   rootReducer = combineReducers({
@@ -50,7 +49,7 @@ class CourseEditor extends Component {
             </div>
           <div className="col-9">
             <TopicListComponent lessonId={this.props.lessonId} history={this.props.history}/>
-            <WidgetComponent />
+            <WidgetListComponent />
 
           </div>
         </div>

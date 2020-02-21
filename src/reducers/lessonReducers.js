@@ -5,7 +5,6 @@ const initialState = {
 }
 
 const lessonReducer = (state = initialState, action) => {
-    console.log("sihjifidsj",action)
     switch(action.type){
         case "FIND_LESSONS_FOR_MODULE":
             console.log("Lessons find", action.lessons)

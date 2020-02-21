@@ -5,10 +5,8 @@ const initialState = {
 }
 
 const topicReducer = (state = initialState, action) => {
-    console.log("topic actions", action)
     switch(action.type){
         case "FIND_TOPICS_FOR_LESSON":
-            console.log("topics find", action.topics)
             return {
                 topics: action.topics.map(topic=>({
                     ...topic,
@@ -50,7 +48,6 @@ const topicReducer = (state = initialState, action) => {
                 selectedLesson: state.selectedLesson
             }
         case "SET_SELECTED_LESSON_FOR_TOPICS":
-            console.log("jugaad executed", action.lessonId)
                 return {
                     topics: [...state.topics],
                     selectedLesson: action.lessonId
