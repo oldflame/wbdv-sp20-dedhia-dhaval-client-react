@@ -32,6 +32,7 @@ class ModuleListComponent extends Component {
                 module={module}
                 key={module._id}
                 courseId={this.props.courseId}
+                moduleId={this.props.moduleId}
                 history={this.props.history}
               />
             ))}

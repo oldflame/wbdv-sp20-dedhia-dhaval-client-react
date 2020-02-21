@@ -47,7 +47,7 @@ class CourseEditor extends Component {
         <NavBarCourseEditor courseTitle={this.state.title} courseId={this.props.courseId} moduleId={this.props.moduleId} history={this.props.history}/>
         <div className="row">
           <div className="col-3 left-bar">
-            <ModuleListComponent courseId={this.props.courseId} history={this.props.history}/>
+            <ModuleListComponent courseId={this.props.courseId} moduleId={this.props.moduleId} history={this.props.history}/>
             </div>
           <div className="col-9">
             <TopicListComponent lessonId={this.props.lessonId} courseId={this.props.courseId} moduleId={this.props.moduleId} history={this.props.history}/>

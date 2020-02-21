@@ -6,7 +6,8 @@ import '../styles/ListItem.css';
 class ModuleListItemComponent extends Component {
   state = {
     editEnabled: false,
-    newTitle: ""
+    newTitle: "",
+    isSelected: false
   };
 
   handleInputChange = event => {
@@ -25,11 +26,22 @@ class ModuleListItemComponent extends Component {
     this.props.history.push(`/course-editor/${this.props.courseId}/module/${this.props.module._id}`)
   }
 
+  componentDidMount() {
+    this.setState({isSelected:this.props.module._id==this.props.moduleId})
+    
+  }
+
+  componentDidUpdate(){
+    if(this.state.isSelected != (this.props.module._id==this.props.moduleId)){
+      this.setState({isSelected:this.props.module._id==this.props.moduleId})
+    }
+  }
+
   render() {
     return (
       <a
         href="#"
-        className={`list-group-item list-group-item-action my-2 round-btn wbdv-module-list ${this.props.module.isSelected && "item-selected"}`}
+        className={`list-group-item list-group-item-action my-2 round-btn wbdv-module-list ${this.state.isSelected && "item-selected"}`}
       >
         {!this.state.editEnabled && (
           <div className="row">
