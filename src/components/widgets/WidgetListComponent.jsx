@@ -23,8 +23,8 @@ class WidgetListComponent extends Component {
       <div>
         {this.props.widgets.map(widget => (
           <>
-            {widget.type === "HEADING" && <HeadingWidget widget={widget} />}
-            {widget.type === "PARAGRAPH" && <ParagraphWidget widget={widget} />}
+            {widget.type === "HEADING" && <HeadingWidget key={widget.id} widget={widget} />}
+            {widget.type === "PARAGRAPH" && <ParagraphWidget key={widget.id} widget={widget} />}
           </>
         ))}
         {/* <ParagraphWidget /> */}
@@ -55,7 +55,7 @@ const dispatchToPropertyMapper = dispatch => {
     createWidget: (heading, size, widgetName) => {
       WidgetService.createWidget(123, {
         text: "Heading Text",
-        size: "1",
+        size: 1,
         name: "Heading Widget",
         type: "HEADING"
       }).then(newWidget =>

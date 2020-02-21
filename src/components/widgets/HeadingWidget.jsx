@@ -3,17 +3,24 @@ import "../../styles/Widget.css";
 import WidgetService from "../../services/WidgetService";
 import { connect } from "react-redux";
 import _ from 'lodash';
+import HeadingPreviewComponent from "./HeadingPreviewComponent";
 
 class HeadingWidget extends Component {
   state = {
-    headingText: "",
-    size: "",
-    widgetName: "",
+    text: "",
+    size: "1",
+    name: "Heading Widget",
   };
+
+  constructor(props){
+    super(props)
+    this.state = props.widget
+
+  } 
 
   handleHeadingTextChange = event => {
     console.log(event.target.value)
-    this.setState({ headingText: event.target.value });
+    this.setState({ text: event.target.value });
   };
 
   handleSizeChange = event => {
@@ -23,14 +30,14 @@ class HeadingWidget extends Component {
 
   handleWidgetNameChange = event => {
     console.log(event.target.value)
-    this.setState({ widgetName: event.target.value });
+    this.setState({ name: event.target.value });
   };
 
   updateWidgetData = () => {
     const widget = _.cloneDeep(this.props.widget)
-    widget.text = this.state.headingText
+    widget.text = this.state.text
     widget.size = this.state.size
-    widget.name = this.state.widgetName
+    widget.name = this.state.name
     this.props.updateWidgetForTopic(widget)
   }
 
@@ -62,7 +69,7 @@ class HeadingWidget extends Component {
           <div className="card-body">
             <div className="row">
               <div className="col-8">
-                <h1>Heading Widget</h1>
+                <h1>{this.state.name}</h1>
               </div>
               <div className="col-4 right-pull">
                 <button
@@ -117,6 +124,8 @@ class HeadingWidget extends Component {
                 </button>
               </div>
             </div>
+            <h3> Preview</h3>
+            <HeadingPreviewComponent widget={this.state}/>
           </div>
         </div>
       </div>

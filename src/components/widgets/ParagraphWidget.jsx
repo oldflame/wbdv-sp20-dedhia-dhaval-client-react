@@ -3,49 +3,54 @@ import WidgetService from "../../services/WidgetService";
 import { connect } from "react-redux";
 import "../../styles/Widget.css";
 
-import _ from 'lodash';
+import _ from "lodash";
+import ParagraphPreviewComponent from "./ParagraphPreviewComponent";
 
 class ParagraphWidget extends Component {
   state = {
-      paragraphText: "",
-      widgetName: "",
+    text: "",
+    name: ""
   };
 
-  handleParagraphChange = event => {
-      this.setState({paragraphText: event.target.value})
+  constructor(props) {
+    super(props);
+    this.state = props.widget;
   }
+
+  handleParagraphChange = event => {
+    this.setState({ text: event.target.value });
+  };
 
   handleWidgetNameChange = event => {
-      this.setState({widgetName: event.target.value})
-  }
+    this.setState({ name: event.target.value });
+  };
 
   updateWidget = () => {
-    const widget = _.cloneDeep(this.props.widget)
-    widget.text = this.state.paragraphText
-    widget.name = this.state.widgetName
-    this.props.updateWidgetForTopic(widget)
-  }
+    const widget = _.cloneDeep(this.props.widget);
+    widget.text = this.state.text;
+    widget.name = this.state.name;
+    this.props.updateWidgetForTopic(widget);
+  };
 
   handleTypeChange = event => {
-    const widget = _.cloneDeep(this.props.widget)
-    
-    if (event.target.value ==  "HEADING") {
-      widget.type = event.target.value;
-      widget.name = "Heading Widget"
-      widget.text = "Heading Text"
-    }
-    
-    
-    if (event.target.value ==  "PARAGRAPH") {
-      widget.type = event.target.value;
-      widget.name = "Paragraph Widget"
-      widget.text = "Paragraph Text"
-    }
-    
-    console.log("type change", event.target.value, widget)
+    const widget = _.cloneDeep(this.props.widget);
 
-    this.props.updateWidgetForTopic(widget)
-  }
+    if (event.target.value == "HEADING") {
+      widget.type = event.target.value;
+      widget.name = "Heading Widget";
+      widget.text = "Heading Text";
+    }
+
+    if (event.target.value == "PARAGRAPH") {
+      widget.type = event.target.value;
+      widget.name = "Paragraph Widget";
+      widget.text = "Paragraph Text";
+    }
+
+    console.log("type change", event.target.value, widget);
+
+    this.props.updateWidgetForTopic(widget);
+  };
 
   render() {
     return (
@@ -54,7 +59,7 @@ class ParagraphWidget extends Component {
           <div className="card-body">
             <div className="row">
               <div className="col-8">
-                <h1>Paragraph Widget</h1>
+                <h1>{this.state.name}</h1>
               </div>
               <div className="col-4 right-pull">
                 <button
@@ -71,12 +76,19 @@ class ParagraphWidget extends Component {
                 </button>
                 <select
                   className="custom-select small-select"
-                  id="inputGroupSelect01" onChange={this.handleTypeChange}
+                  id="inputGroupSelect01"
+                  onChange={this.handleTypeChange}
                 >
                   <option value="HEADING">Heading</option>
-                  <option selected value="PARAGRAPH">Paragraph</option>
+                  <option selected value="PARAGRAPH">
+                    Paragraph
+                  </option>
                 </select>
-                <button type="button" className="btn btn-danger" onClick={()=> this.props.deleteWidget(this.props.widget.id)}>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={() => this.props.deleteWidget(this.props.widget.id)}
+                >
                   <i className="fa fa-times"></i>
                 </button>
               </div>
@@ -98,9 +110,17 @@ class ParagraphWidget extends Component {
               />
             </div>
             <div className="offset-11 col-1">
-              <button type="button" className="btn btn-success" onClick={this.updateWidget}>
+              <button
+                type="button"
+                className="btn btn-success"
+                onClick={this.updateWidget}
+              >
                 Save
               </button>
+            </div>
+            <div>
+              <h3> Preview </h3>
+              <ParagraphPreviewComponent widget={this.state} />
             </div>
           </div>
         </div>
@@ -125,19 +145,18 @@ const dispatchToPropertyMapper = dispatch => {
         })
       );
     },
-    updateWidgetForTopic: (widget) => {
-      console.log("Updating", widget)
-      WidgetService.updateWidget(widget.id,widget).then(
+    updateWidgetForTopic: widget => {
+      console.log("Updating", widget);
+      WidgetService.updateWidget(widget.id, widget).then(
         dispatch({
-          type:"UPDATE_WIDGET_FOR_TOPIC",
-          widget:widget
+          type: "UPDATE_WIDGET_FOR_TOPIC",
+          widget: widget
         })
-      );  
-    },
+      );
+    }
   };
 };
 export default connect(
-    stateToPropertyMapper,
-    dispatchToPropertyMapper
-  ) (ParagraphWidget);
-
+  stateToPropertyMapper,
+  dispatchToPropertyMapper
+)(ParagraphWidget);
