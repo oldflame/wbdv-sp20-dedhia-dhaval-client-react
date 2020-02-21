@@ -25,6 +25,10 @@ const widgetReducer = (state = initialState, action) => {
       return {
         widgets: widgets1
       };
+    case "FIND_WIDGET_FOR_TOPIC":
+      return {
+        widgets: action.widgets
+      };
     default:
       return state;
   }

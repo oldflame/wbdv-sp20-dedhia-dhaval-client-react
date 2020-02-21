@@ -11,8 +11,13 @@ class WidgetListComponent extends Component {
   state = {};
 
   componentDidUpdate() {
-    console.log(this.props.widgets);
+    // this.props.findWidgetsForTopic('123')
   }
+
+  componentDidMount() {
+    this.props.findWidgetsForTopic('123')
+  }
+
   render() {
     return (
       <div>
@@ -59,6 +64,14 @@ const dispatchToPropertyMapper = dispatch => {
           newWidget: newWidget
         })
       );
+    },
+    findWidgetsForTopic: topicId => {
+      WidgetService.findWidgetsForTopic(topicId).then( (widgets)=>
+        dispatch({
+          type: "FIND_WIDGET_FOR_TOPIC",
+          widgets: widgets
+        })
+      )
     }
 }
 };

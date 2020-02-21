@@ -12,16 +12,27 @@ class HeadingWidget extends Component {
   };
 
   handleHeadingTextChange = event => {
+    console.log(event.target.value)
     this.setState({ headingText: event.target.value });
   };
 
   handleSizeChange = event => {
+    console.log(event.target.value)
     this.setState({ size: event.target.value });
   };
 
   handleWidgetNameChange = event => {
+    console.log(event.target.value)
     this.setState({ widgetName: event.target.value });
   };
+
+  updateWidgetData = () => {
+    const widget = _.cloneDeep(this.props.widget)
+    widget.text = this.state.headingText
+    widget.size = this.state.size
+    widget.name = this.state.widgetName
+    this.props.updateWidgetForTopic(widget)
+  }
 
   handleTypeChange = event => {
     const widget = _.cloneDeep(this.props.widget)
@@ -74,7 +85,7 @@ class HeadingWidget extends Component {
                   <option value="HEADING" selected>Heading</option>
                   <option value="PARAGRAPH">Paragraph</option>
                 </select>
-                <button type="button" className="btn btn-danger" onClick={this.props.deleteWidget}>
+                <button type="button" className="btn btn-danger" onClick={()=> this.props.deleteWidget(this.props.widget.id)}>
                   <i className="fa fa-times"></i>
                 </button>
               </div>
@@ -84,12 +95,13 @@ class HeadingWidget extends Component {
                 type="textarea"
                 className="form-control"
                 placeholder="Heading Text"
+                onChange={this.handleHeadingTextChange}
               />
-              <select className="custom-select mt-3">
-                <option selected>Heading 1</option>
-                <option value="heading2">Heading 2</option>
-                <option value="heading3">Heading 3</option>
-                <option value="heading4">Heading 4</option>
+              <select className="custom-select mt-3" onChange={this.handleSizeChange}>
+                <option selected value="1">Heading 1</option>
+                <option value="2">Heading 2</option>
+                <option value="3">Heading 3</option>
+                <option value="4">Heading 4</option>
               </select>
             </div>
             <div className="col-12">
@@ -97,9 +109,10 @@ class HeadingWidget extends Component {
                 type="textarea"
                 className="form-control mt-3 my-2"
                 placeholder="Widget Name"
+                onChange={this.handleWidgetNameChange}
               />
               <div className="offset-11 col-1">
-                <button type="button" className="btn btn-success">
+                <button type="button" className="btn btn-success" onClick={this.updateWidgetData}>
                   Save
                 </button>
               </div>

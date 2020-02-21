@@ -19,6 +19,13 @@ class ParagraphWidget extends Component {
       this.setState({widgetName: event.target.value})
   }
 
+  updateWidget = () => {
+    const widget = _.cloneDeep(this.props.widget)
+    widget.text = this.state.paragraphText
+    widget.name = this.state.widgetName
+    this.props.updateWidgetForTopic(widget)
+  }
+
   handleTypeChange = event => {
     const widget = _.cloneDeep(this.props.widget)
     
@@ -69,7 +76,7 @@ class ParagraphWidget extends Component {
                   <option value="HEADING">Heading</option>
                   <option selected value="PARAGRAPH">Paragraph</option>
                 </select>
-                <button type="button" className="btn btn-danger" onClick={this.props.deleteWidget}>
+                <button type="button" className="btn btn-danger" onClick={()=> this.props.deleteWidget(this.props.widget.id)}>
                   <i className="fa fa-times"></i>
                 </button>
               </div>
@@ -79,6 +86,7 @@ class ParagraphWidget extends Component {
                 type="text"
                 className="form-control"
                 placeholder="Paragraph Text"
+                onChange={this.handleParagraphChange}
               />
             </div>
             <div className="col-12">
@@ -86,10 +94,11 @@ class ParagraphWidget extends Component {
                 type="textarea"
                 className="form-control mt-3 my-2"
                 placeholder="Widget Name"
+                onChange={this.handleWidgetNameChange}
               />
             </div>
             <div className="offset-11 col-1">
-              <button type="button" className="btn btn-success">
+              <button type="button" className="btn btn-success" onClick={this.updateWidget}>
                 Save
               </button>
             </div>

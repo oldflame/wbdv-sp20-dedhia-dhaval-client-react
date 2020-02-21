@@ -32,6 +32,7 @@ export const updateWidget = async (widgetId,widget) => {
 
 
 export const deleteWidget = async (widgetId) => {
+    console.log("in service",widgetId)
     const response = await fetch(`${API_URL}widgets/${widgetId}`,{
         method : 'DELETE',
         headers : {
