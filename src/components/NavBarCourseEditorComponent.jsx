@@ -50,7 +50,7 @@ class NavBarCourseEditorComponent extends Component {
                 {this.props.courseTitle}
               </a>
 
-              {this.props.lessons &&
+              {this.props.moduleId && this.props.lessons &&
                 this.props.lessons.map(lesson => (
                   <LessonItemComponent
                     lesson={lesson}
@@ -83,7 +83,7 @@ class NavBarCourseEditorComponent extends Component {
                   </span>
                 </>
               )}
-              {!this.state.showInputField && (
+              {!this.state.showInputField && this.props.moduleId && (
                 <a className="navbar-brand navbar-text-color" href="#">
                   <i
                     className="fa fa-plus wbdv-new-page-btn mx-2"

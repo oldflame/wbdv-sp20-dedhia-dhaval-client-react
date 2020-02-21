@@ -25,28 +25,31 @@ class WidgetListComponent extends Component {
   render() {
     return (
       <div>
-        {this.props.widgets.map(widget => (
-          <>
-            {widget.type === "HEADING" && (
-              <HeadingWidget key={widget.id} widget={widget} />
-            )}
-            {widget.type === "PARAGRAPH" && (
-              <ParagraphWidget key={widget.id} widget={widget} />
-            )}
-          </>
-        ))}
-        {/* <ParagraphWidget /> */}
-        <div className="row">
-          <div className="offset-11 col-1">
-            <button
-              type="button"
-              className="btn btn-dark"
-              onClick={() => this.props.createWidget(this.props.topicId)}
-            >
-              <i className="fa fa-2x fa-plus"></i>
-            </button>
+        {this.props.widgets &&
+          this.props.topicId &&
+          this.props.widgets.map(widget => (
+            <>
+              {widget.type === "HEADING" && (
+                <HeadingWidget key={widget.id} widget={widget} />
+              )}
+              {widget.type === "PARAGRAPH" && (
+                <ParagraphWidget key={widget.id} widget={widget} />
+              )}
+            </>
+          ))}
+        {this.props.topicId && (
+          <div className="row">
+            <div className="offset-11 col-1">
+              <button
+                type="button"
+                className="btn btn-dark"
+                onClick={() => this.props.createWidget(this.props.topicId)}
+              >
+                <i className="fa fa-2x fa-plus"></i>
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     );
   }

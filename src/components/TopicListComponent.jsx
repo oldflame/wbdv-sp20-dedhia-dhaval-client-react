@@ -25,7 +25,7 @@ class TopicListComponent extends Component {
   };
 
   submitTopic = () => {
-    this.props.createTopicForLesson(this.props.selectedLesson, {
+    this.props.createTopicForLesson(this.props.lessonId, {
       title: this.state.topicTitle,
       isSelected: false
     });
@@ -35,7 +35,7 @@ class TopicListComponent extends Component {
   render() {
     return (
       <div className="m-2">
-        {this.props.topics &&
+        {this.props.lessonId && this.props.topics &&
           this.props.topics.map(topic => (
             <TopicListItemComponent topic={topic} key={topic._id} courseId={this.props.courseId} moduleId={this.props.moduleId} lessonId={this.props.lessonId} topicId={this.props.topicId} history={this.props.history} />
           ))}
@@ -58,7 +58,7 @@ class TopicListComponent extends Component {
             ></i>
           </>
         )}
-        {!this.state.showInputField && (
+        {!this.state.showInputField && this.props.lessonId && (
           <button className="btn btn-outline-dark mt-2">
             <i
               className="fa fa-2x fa-plus"
