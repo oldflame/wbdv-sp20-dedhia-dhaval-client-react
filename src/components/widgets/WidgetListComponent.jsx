@@ -8,7 +8,9 @@ import WidgetService, {
 } from "../../services/WidgetService";
 
 class WidgetListComponent extends Component {
-  state = {};
+  state = {
+
+  };
 
   componentDidUpdate(prevProps) {
     console.log("In mount", this.props.topicId);
@@ -27,13 +29,13 @@ class WidgetListComponent extends Component {
       <div>
         {this.props.widgets &&
           this.props.topicId &&
-          this.props.widgets.map(widget => (
+          this.props.widgets.map((widget, $index) => (
             <>
               {widget.type === "HEADING" && (
-                <HeadingWidget key={widget.id} widget={widget} />
+                <HeadingWidget key={widget.id} widget={widget} widgetIndex={$index} widgetCount={this.props.widgets.length} />
               )}
               {widget.type === "PARAGRAPH" && (
-                <ParagraphWidget key={widget.id} widget={widget} />
+                <ParagraphWidget key={widget.id} widget={widget} widgetIndex={$index} widgetCount={this.props.widgets.length} />
               )}
             </>
           ))}
@@ -43,7 +45,7 @@ class WidgetListComponent extends Component {
               <button
                 type="button"
                 className="btn btn-dark"
-                onClick={() => this.props.createWidget(this.props.topicId)}
+                onClick={() => this.props.createWidget(this.props.topicId,this.props.widgets.length-1)}
               >
                 <i className="fa fa-2x fa-plus"></i>
               </button>
@@ -63,12 +65,13 @@ const stateToPropertyMapper = state => {
 
 const dispatchToPropertyMapper = dispatch => {
   return {
-    createWidget: topicId => {
+    createWidget: (topicId, order) => {
       WidgetService.createWidget(topicId, {
         text: "Heading Text",
         size: 1,
         name: "Heading Widget",
-        type: "HEADING"
+        type: "HEADING",
+        order: order
       }).then(newWidget =>
         dispatch({
           type: "CREATE_WIDGET_FOR_TOPIC",

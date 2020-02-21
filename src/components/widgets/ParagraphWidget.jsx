@@ -61,18 +61,29 @@ class ParagraphWidget extends Component {
                 <h1>{this.state.name}</h1>
               </div>
               <div className="col-4 right-pull">
-                <button
-                  type="button"
-                  className="btn btn-outline-dark yellow-btn"
-                >
-                  <i className="fa fa-arrow-up"></i>
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-outline-dark yellow-btn"
-                >
-                  <i className="fa fa-arrow-down"></i>
-                </button>
+              {this.props.widgetIndex != 0 && (
+                  <button
+                    type="button"
+                    className="btn btn-outline-dark yellow-btn"
+                    onClick={() =>
+                      this.props.moveWidget("UP", this.props.widget.id)
+                    }
+                  >
+                    <i className="fa fa-arrow-up"></i>
+                  </button>
+                )}
+
+                {this.props.widgetIndex != (this.props.widgetCount - 1) && (
+                  <button
+                    type="button"
+                    className="btn btn-outline-dark yellow-btn"
+                    onClick={() =>
+                      this.props.moveWidget("DOWN", this.props.widget.id)
+                    }
+                  >
+                    <i className="fa fa-arrow-down"></i>
+                  </button>
+                )}
                 <select
                   className="custom-select small-select"
                   id="inputGroupSelect01"
@@ -151,6 +162,19 @@ const dispatchToPropertyMapper = dispatch => {
           widget: widget
         })
       );
+    },
+    moveWidget: (direction, widgetId) => {
+      if (direction === "UP") {
+        dispatch({
+          type: "MOVE_WIDGET_UP",
+          widgetId: widgetId
+        })
+      } else if (direction === "DOWN") {
+        dispatch({
+          type: "MOVE_WIDGET_DOWN",
+          widgetId: widgetId
+        })
+      }
     }
   };
 };

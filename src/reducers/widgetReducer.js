@@ -29,6 +29,34 @@ const widgetReducer = (state = initialState, action) => {
       return {
         widgets: action.widgets
       };
+    case "MOVE_WIDGET_UP": 
+    console.log("In up",action)
+    let widgets2 = [...state.widgets];
+    const widgetIndex =  _.findIndex(widgets2, { id: action.widgetId });
+    console.log(action,widgetIndex)
+    const temp = widgets2[widgetIndex].order;
+    widgets2[widgetIndex].order = widgets2[widgetIndex-1].order;
+    widgets2[widgetIndex-1].order = temp;
+    console.log("move", widgets2)
+    widgets2 = _.sortBy(widgets2,'order');
+
+      return{
+        widgets: _.cloneDeep(widgets2)
+      }
+
+      case "MOVE_WIDGET_DOWN": 
+      console.log("In down",action)
+    let widgets3 = [...state.widgets];
+    const widgetIndex2 =  _.findIndex(widgets3, { id: action.widgetId });
+    const temp2 = widgets3[widgetIndex2].order;
+    widgets3[widgetIndex2].order = widgets3[widgetIndex2+1].order;
+    widgets3[widgetIndex2+1].order = temp2;
+    widgets3 = _.sortBy(widgets3,'order');
+
+      return{
+        widgets:_.cloneDeep(widgets3)
+      }
+    
     default:
       return state;
   }
