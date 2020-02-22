@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import HeadingWidget from "./HeadingWidget";
 import ParagraphWidget from "./ParagraphWidget";
+import ParagraphPreviewComponent from './ParagraphPreviewComponent';
+import HeadingPreviewComponent from './HeadingPreviewComponent';
 import { connect } from "react-redux";
 import "../../services/WidgetService";
 import WidgetService, {
@@ -9,7 +11,7 @@ import WidgetService, {
 
 class WidgetListComponent extends Component {
   state = {
-
+    showPreview: false
   };
 
   componentDidUpdate(prevProps) {
@@ -24,18 +26,72 @@ class WidgetListComponent extends Component {
     this.props.findWidgetsForTopic(this.props.topicId);
   }
 
+  togglePreview = e => {
+    console.log("preview", e.target.checked)
+    this.setState({ showPreview: e.target.checked });
+  };
+
   render() {
     return (
       <div>
-        {this.props.widgets &&
+        <div className="row">
+          <div className="offset-9 col-3">
+            <div class="custom-control custom-switch pull-left mr-3">
+              <input
+                onChange={this.togglePreview}
+                type="checkbox"
+                class="custom-control-input"
+                id="customSwitch1"
+              />
+              <label class="custom-control-label" for="customSwitch1">
+                Preview
+              </label>
+            </div>
+            <button
+              className="btn btn-success pull-left"
+              onClick={() => this.props.saveAllWidgets(this.props.widgets)}
+            >
+              Save
+            </button>
+          </div>
+        </div>
+        {!this.state.showPreview && this.props.widgets &&
           this.props.topicId &&
           this.props.widgets.map((widget, $index) => (
             <>
               {widget.type === "HEADING" && (
-                <HeadingWidget key={widget.id} widget={widget} widgetIndex={$index} widgetCount={this.props.widgets.length} />
+                <HeadingWidget
+                  key={widget.id}
+                  widget={widget}
+                  widgetIndex={$index}
+                  widgetCount={this.props.widgets.length}
+                />
               )}
               {widget.type === "PARAGRAPH" && (
-                <ParagraphWidget key={widget.id} widget={widget} widgetIndex={$index} widgetCount={this.props.widgets.length} />
+                <ParagraphWidget
+                  key={widget.id}
+                  widget={widget}
+                  widgetIndex={$index}
+                  widgetCount={this.props.widgets.length}
+                />
+              )}
+            </>
+          ))}
+          {this.state.showPreview && this.props.widgets &&
+          this.props.topicId &&
+          this.props.widgets.map((widget, $index) => (
+            <>
+              {widget.type === "HEADING" && (
+                <HeadingPreviewComponent
+                  key={widget.id}
+                  widget={widget}
+                />
+              )}
+              {widget.type === "PARAGRAPH" && (
+                <ParagraphPreviewComponent
+                  key={widget.id}
+                  widget={widget}
+                />
               )}
             </>
           ))}
@@ -45,7 +101,15 @@ class WidgetListComponent extends Component {
               <button
                 type="button"
                 className="btn btn-dark"
-                onClick={() => this.props.createWidget(this.props.topicId,this.props.widgets.length-1)}
+                onClick={() =>
+                  this.props.createWidget(
+                    this.props.topicId,
+                    this.props.widgets.length == 0
+                      ? 1
+                      : this.props.widgets[this.props.widgets.length - 1]
+                          .order + 1
+                  )
+                }
               >
                 <i className="fa fa-2x fa-plus"></i>
               </button>
@@ -86,6 +150,11 @@ const dispatchToPropertyMapper = dispatch => {
           widgets: widgets
         })
       );
+    },
+    saveAllWidgets: widgets => {
+      WidgetService.saveAllWidgets(widgets).then(() => {
+        alert("Widgets saved successfully");
+      });
     }
   };
 };

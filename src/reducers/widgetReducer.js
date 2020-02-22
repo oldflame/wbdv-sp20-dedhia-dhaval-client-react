@@ -7,7 +7,7 @@ const widgetReducer = (state = initialState, action) => {
   switch (action.type) {
     case "CREATE_WIDGET_FOR_TOPIC":
       return {
-        widgets: _.sortBy([...state.widgets, action.newWidget], 'order')
+        widgets: [...state.widgets, action.newWidget]
       };
     case "DELETE_WIDGET_FOR_TOPIC":
       const widgets = [...state.widgets];
@@ -27,7 +27,7 @@ const widgetReducer = (state = initialState, action) => {
       };
     case "FIND_WIDGET_FOR_TOPIC":
       return {
-        widgets: action.widgets
+        widgets: _.sortBy(action.widgets, 'order')
       };
     case "MOVE_WIDGET_UP": 
     console.log("In up",action)

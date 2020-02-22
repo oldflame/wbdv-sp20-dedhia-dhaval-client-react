@@ -88,6 +88,7 @@ class ParagraphWidget extends Component {
                   className="custom-select small-select"
                   id="inputGroupSelect01"
                   onChange={this.handleTypeChange}
+                  value={this.props.widget.type}
                 >
                   <option value="HEADING">Heading</option>
                   <option selected value="PARAGRAPH">
@@ -109,6 +110,7 @@ class ParagraphWidget extends Component {
                 className="form-control"
                 placeholder="Paragraph Text"
                 onChange={this.handleParagraphChange}
+                value={this.state.text}
               />
             </div>
             <div className="col-12">
@@ -116,6 +118,7 @@ class ParagraphWidget extends Component {
                 type="textarea"
                 className="form-control mt-3 my-2"
                 placeholder="Widget Name"
+                value={this.state.name}
                 onChange={this.handleWidgetNameChange}
               />
             </div>

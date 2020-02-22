@@ -1,3 +1,4 @@
+// const API_URL = "https://wbdv-sp20-ddhaval-server-java.herokuapp.com/api/"
 const API_URL = "http://localhost:8080/api/"
 
 
@@ -29,7 +30,16 @@ export const updateWidget = async (widgetId,widget) => {
     return await response.json()
 }
 
-
+export const saveAllWidgets = async (widgets) => {
+    const response = await fetch(`${API_URL}widgets/all`,{
+        method : 'PUT',
+        body : JSON.stringify(widgets),
+        headers : {
+            'content-type' : 'application/json'
+        }
+    })
+    return await response.json()
+}
 
 export const deleteWidget = async (widgetId) => {
     const response = await fetch(`${API_URL}widgets/${widgetId}`,{
@@ -46,5 +56,6 @@ export default {
     createWidget,
     updateWidget,
     deleteWidget,
-    findWidgetsForTopic
+    findWidgetsForTopic,
+    saveAllWidgets
 }

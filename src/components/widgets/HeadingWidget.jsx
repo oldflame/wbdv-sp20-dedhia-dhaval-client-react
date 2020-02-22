@@ -90,6 +90,7 @@ class HeadingWidget extends Component {
                 )}
                 <select
                   onChange={this.handleTypeChange}
+                  value={this.props.widget.type}
                   className="custom-select small-select"
                   id="inputGroupSelect01"
                 >
@@ -112,11 +113,13 @@ class HeadingWidget extends Component {
                 type="textarea"
                 className="form-control"
                 placeholder="Heading Text"
+                value={this.state.text}
                 onChange={this.handleHeadingTextChange}
               />
               <select
                 className="custom-select mt-3"
                 onChange={this.handleSizeChange}
+                value={this.state.size}
               >
                 <option selected value="1">
                   Heading 1
@@ -131,6 +134,7 @@ class HeadingWidget extends Component {
                 type="textarea"
                 className="form-control mt-3 my-2"
                 placeholder="Widget Name"
+                value={this.state.name}
                 onChange={this.handleWidgetNameChange}
               />
               <div className="offset-11 col-1">
