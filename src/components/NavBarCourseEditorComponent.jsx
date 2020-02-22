@@ -76,9 +76,7 @@ class NavBarCourseEditorComponent extends Component {
                     />
                     <i
                       className="fa fa-times wbdv-module-item-delete-btn mx-1 text-danger"
-                      onClick={() =>
-                        this.props.deleteModuleForCourse(this.props.module._id)
-                      }
+                      onClick={() => this.setState({ showInputField: false })}
                     ></i>
                   </span>
                 </>
