@@ -70,6 +70,7 @@ class ImageWidget extends Component {
                 <h1>{this.state.name}</h1>
               </div>
               <div className="col-4 right-pull">
+              {this.props.widgetIndex != 0 && (
                 <button
                   type="button"
                   className="btn btn-outline-dark yellow-btn"
@@ -79,6 +80,8 @@ class ImageWidget extends Component {
                 >
                   <i className="fa fa-arrow-up"></i>
                 </button>
+              )}
+              {this.props.widgetIndex != (this.props.widgetCount - 1) && (
                 <button
                   type="button"
                   className="btn btn-outline-dark yellow-btn"
@@ -88,6 +91,7 @@ class ImageWidget extends Component {
                 >
                   <i className="fa fa-arrow-down"></i>
                 </button>
+              )}
                 <select
                   className="custom-select small-select"
                   id="inputGroupSelect01"
