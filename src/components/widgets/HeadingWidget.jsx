@@ -52,6 +52,12 @@ class HeadingWidget extends Component {
       widget.text = "Paragraph Text";
     }
 
+    if (event.target.value == "IMAGE") {
+      widget.type = event.target.value;
+      widget.name = "Image Widget";
+      widget.text = "Image URL";
+    }
+
     this.props.updateWidgetForTopic(widget);
   };
 

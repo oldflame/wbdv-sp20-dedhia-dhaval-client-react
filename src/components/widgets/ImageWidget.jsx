@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import _ from "lodash";
+import WidgetService from "../../services/WidgetService";
+import { connect } from "react-redux";
+
 
 
 class ImageWidget extends Component {
@@ -49,6 +52,12 @@ class ImageWidget extends Component {
       widget.text = "Paragraph Text";
     }
 
+    if (event.target.value == "IMAGE") {
+      widget.type = event.target.value;
+      widget.name = "Image Widget";
+      widget.text = "Image URL";
+    }
+
     this.props.updateWidgetForTopic(widget);
   };
   render() {
@@ -64,27 +73,33 @@ class ImageWidget extends Component {
                 <button
                   type="button"
                   className="btn btn-outline-dark yellow-btn"
+                  onClick={() =>
+                    this.props.moveWidget("UP", this.props.widget.id)
+                  }
                 >
                   <i className="fa fa-arrow-up"></i>
                 </button>
                 <button
                   type="button"
                   className="btn btn-outline-dark yellow-btn"
+                  onClick={() =>
+                    this.props.moveWidget("DOWN", this.props.widget.id)
+                  }
                 >
                   <i className="fa fa-arrow-down"></i>
                 </button>
                 <select
                   className="custom-select small-select"
                   id="inputGroupSelect01"
+                  onChange={this.handleTypeChange}
+                  value={this.props.widget.type}
                 >
-                  <option value="HEADING" selected>
-                    Heading
-                  </option>
+                  <option value="HEADING">Heading</option>
                   <option value="PARAGRAPH">Paragraph</option>
-                  <option value="IMAGE">Image</option>
+                  <option selected value="IMAGE">Image</option>
                   <option value="LIST">List</option>
                 </select>
-                <button type="button" className="btn btn-danger">
+                <button type="button" className="btn btn-danger" onClick={() => this.props.deleteWidget(this.props.widget.id)}>
                   <i className="fa fa-times"></i>
                 </button>
               </div>
@@ -98,5 +113,45 @@ class ImageWidget extends Component {
     );
   }
 }
-
-export default ImageWidget;
+const stateToPropertyMapper = state => {
+  return {
+    widgets: state.widgets.widgets
+  };
+};
+const dispatchToPropertyMapper = dispatch => {
+  return {
+    deleteWidget: widgetId => {
+      WidgetService.deleteWidget(widgetId).then(
+        dispatch({
+          type: "DELETE_WIDGET_FOR_TOPIC",
+          widgetId: widgetId
+        })
+      );
+    },
+    updateWidgetForTopic: widget => {
+      WidgetService.updateWidget(widget.id, widget).then(
+        dispatch({
+          type: "UPDATE_WIDGET_FOR_TOPIC",
+          widget: widget
+        })
+      );
+    },
+    moveWidget: (direction, widgetId) => {
+      if (direction === "UP") {
+        dispatch({
+          type: "MOVE_WIDGET_UP",
+          widgetId: widgetId
+        });
+      } else if (direction === "DOWN") {
+        dispatch({
+          type: "MOVE_WIDGET_DOWN",
+          widgetId: widgetId
+        });
+      }
+    }
+  };
+};
+export default connect(
+  stateToPropertyMapper,
+  dispatchToPropertyMapper
+)(ImageWidget);
