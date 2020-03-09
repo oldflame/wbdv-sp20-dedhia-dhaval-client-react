@@ -47,6 +47,12 @@ class ParagraphWidget extends Component {
       widget.text = "Paragraph Text";
     }
 
+    if (event.target.value == "IMAGE") {
+      widget.type = event.target.value;
+      widget.name = "Image Widget";
+      widget.text = "Image URL";
+    }
+
 
     this.props.updateWidgetForTopic(widget);
   };
@@ -94,6 +100,8 @@ class ParagraphWidget extends Component {
                   <option selected value="PARAGRAPH">
                     Paragraph
                   </option>
+                  <option value="IMAGE">Image</option>
+                  <option value="LIST">List</option>
                 </select>
                 <button
                   type="button"

@@ -98,6 +98,8 @@ class HeadingWidget extends Component {
                     Heading
                   </option>
                   <option value="PARAGRAPH">Paragraph</option>
+                  <option value="IMAGE">Image</option>
+                  <option value="LIST">List</option>
                 </select>
                 <button
                   type="button"
