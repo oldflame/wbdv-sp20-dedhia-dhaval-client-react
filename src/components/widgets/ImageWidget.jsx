@@ -3,13 +3,12 @@ import _ from "lodash";
 import WidgetService from "../../services/WidgetService";
 import { connect } from "react-redux";
 
-
-
 class ImageWidget extends Component {
   state = {
-    text: "",
-    size: "1",
-    name: "Image Widget"
+    name: "Widget name",
+    url: "",
+    width: 150,
+    height: 150
   };
 
   constructor(props) {
@@ -28,12 +27,24 @@ class ImageWidget extends Component {
   handleWidgetNameChange = event => {
     this.setState({ name: event.target.value });
   };
+  handleURLChange = event => {
+    this.setState({ url: event.target.value});
+  }
+
+  handleWidthChange = event => {
+    this.setState({ width: event.target.value })
+  }
+
+  handleHeightChange = event => {
+    this.setState({ height: event.target.value})
+  }
 
   updateWidgetData = () => {
     const widget = _.cloneDeep(this.props.widget);
-    widget.text = this.state.text;
-    widget.size = this.state.size;
     widget.name = this.state.name;
+    widget.url = this.state.url;
+    widget.width = this.state.width;
+    widget.height = this.state.height;
     this.props.updateWidgetForTopic(widget);
   };
 
@@ -54,7 +65,7 @@ class ImageWidget extends Component {
 
     if (event.target.value == "IMAGE") {
       widget.type = event.target.value;
-      widget.name = "Image Widget";
+      widget.name = "Widget name";
       widget.text = "Image URL";
     }
 
@@ -70,28 +81,28 @@ class ImageWidget extends Component {
                 <h1>{this.state.name}</h1>
               </div>
               <div className="col-4 right-pull">
-              {this.props.widgetIndex != 0 && (
-                <button
-                  type="button"
-                  className="btn btn-outline-dark yellow-btn"
-                  onClick={() =>
-                    this.props.moveWidget("UP", this.props.widget.id)
-                  }
-                >
-                  <i className="fa fa-arrow-up"></i>
-                </button>
-              )}
-              {this.props.widgetIndex != (this.props.widgetCount - 1) && (
-                <button
-                  type="button"
-                  className="btn btn-outline-dark yellow-btn"
-                  onClick={() =>
-                    this.props.moveWidget("DOWN", this.props.widget.id)
-                  }
-                >
-                  <i className="fa fa-arrow-down"></i>
-                </button>
-              )}
+                {this.props.widgetIndex != 0 && (
+                  <button
+                    type="button"
+                    className="btn btn-outline-dark yellow-btn"
+                    onClick={() =>
+                      this.props.moveWidget("UP", this.props.widget.id)
+                    }
+                  >
+                    <i className="fa fa-arrow-up"></i>
+                  </button>
+                )}
+                {this.props.widgetIndex != this.props.widgetCount - 1 && (
+                  <button
+                    type="button"
+                    className="btn btn-outline-dark yellow-btn"
+                    onClick={() =>
+                      this.props.moveWidget("DOWN", this.props.widget.id)
+                    }
+                  >
+                    <i className="fa fa-arrow-down"></i>
+                  </button>
+                )}
                 <select
                   className="custom-select small-select"
                   id="inputGroupSelect01"
@@ -100,15 +111,70 @@ class ImageWidget extends Component {
                 >
                   <option value="HEADING">Heading</option>
                   <option value="PARAGRAPH">Paragraph</option>
-                  <option selected value="IMAGE">Image</option>
+                  <option selected value="IMAGE">
+                    Image
+                  </option>
                   <option value="LIST">List</option>
                 </select>
-                <button type="button" className="btn btn-danger" onClick={() => this.props.deleteWidget(this.props.widget.id)}>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={() => this.props.deleteWidget(this.props.widget.id)}
+                >
                   <i className="fa fa-times"></i>
                 </button>
               </div>
-              <div>
-                <img src=""></img>
+              <div className="col-12">
+                <input
+                  type="textarea"
+                  className="form-control"
+                  placeholder="Image URL"
+                  value={this.state.url}
+                  onChange={this.handleURLChange}
+                />
+              </div>
+              <div className="col-12">
+                <input
+                  type="textarea"
+                  className="form-control mt-3 my-2"
+                  placeholder="Widget Name"
+                  value={this.state.name}
+                  onChange={this.handleWidgetNameChange}
+                />
+              </div>
+
+              <div className="col-md-6 mt-3">
+                <p>Image Width</p>
+                <input
+                  type="number"
+                  className="form-control"
+                  placeholder="100"
+                  value={this.state.width}
+                  onChange={this.handleWidthChange}
+                />
+              </div>
+              <div className="col-md-6 mt-3">
+                <p>Image Height</p>
+                <input
+                  type="number"
+                  className="form-control"
+                  placeholder="100"
+                  value={this.state.height}
+                  onChange={this.handleHeightChange}
+                />
+              </div>
+
+              <div className="col-12 mt-3">
+                <img className="shadow" src={this.state.url} width={this.state.width} height={this.state.height} />
+              </div>
+              <div className="offset-11 col-1">
+                <button
+                  type="button"
+                  className="btn btn-success"
+                  onClick={this.updateWidgetData}
+                >
+                  Save
+                </button>
               </div>
             </div>
           </div>
