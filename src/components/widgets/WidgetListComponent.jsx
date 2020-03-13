@@ -4,6 +4,7 @@ import ParagraphWidget from "./ParagraphWidget";
 import ImageWidget from "./ImageWidget";
 import ParagraphPreviewComponent from './ParagraphPreviewComponent';
 import HeadingPreviewComponent from './HeadingPreviewComponent';
+import ImagePreviewComponent from './ImagePreviewComponent';
 import { connect } from "react-redux";
 import "../../services/WidgetService";
 import WidgetService, {
@@ -100,6 +101,14 @@ class WidgetListComponent extends Component {
                 <ParagraphPreviewComponent
                   key={widget.id}
                   widget={widget}
+                />
+              )}
+              {widget.type === "IMAGE" && (
+                <ImagePreviewComponent
+                  key={widget.id}
+                  url={widget.url}
+                  width={widget.width}
+                  height={widget.height}
                 />
               )}
             </>

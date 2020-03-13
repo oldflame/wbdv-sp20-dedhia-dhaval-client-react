@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import _ from "lodash";
 import WidgetService from "../../services/WidgetService";
 import { connect } from "react-redux";
+import ImagePreviewComponent from "./ImagePreviewComponent";
 
 class ImageWidget extends Component {
   state = {
@@ -176,6 +177,9 @@ class ImageWidget extends Component {
                   Save
                 </button>
               </div>
+            </div>
+            <div>
+              <ImagePreviewComponent url={this.state.url} width={this.state.width} height={this.state.height} />
             </div>
           </div>
         </div>

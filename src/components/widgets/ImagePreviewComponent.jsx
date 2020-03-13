@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-const ImagePreviewComponent = () => {
+const ImagePreviewComponent = (props) => {
     return (  
-        <div>
-            
+        <div className="mt-2">
+            <img className="shadow" src={props.url} width={props.width} height={props.height} />
         </div>
     );
 }
