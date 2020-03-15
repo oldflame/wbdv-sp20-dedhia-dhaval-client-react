@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import HeadingWidget from "./HeadingWidget";
 import ParagraphWidget from "./ParagraphWidget";
 import ImageWidget from "./ImageWidget";
+import ListWidget from "./ListWidget";
 import ParagraphPreviewComponent from './ParagraphPreviewComponent';
 import HeadingPreviewComponent from './HeadingPreviewComponent';
 import ImagePreviewComponent from './ImagePreviewComponent';
@@ -79,6 +80,14 @@ class WidgetListComponent extends Component {
               )}
               {widget.type === "IMAGE" && (
                 <ImageWidget
+                key={widget.id}
+                widget={widget}
+                widgetIndex={$index}
+                //widgetCount={this.props.widget.length}
+                />
+              )}
+              {widget.type === "LIST" && (
+                <ListWidget
                 key={widget.id}
                 widget={widget}
                 widgetIndex={$index}

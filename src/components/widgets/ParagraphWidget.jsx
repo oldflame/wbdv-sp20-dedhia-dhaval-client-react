@@ -53,6 +53,12 @@ class ParagraphWidget extends Component {
       widget.text = "Image URL";
     }
 
+    if (event.target.value == "LIST") {
+      widget.type = event.target.value;
+      widget.name = "List Widget";
+      widget.text = "";
+    }
+
 
     this.props.updateWidgetForTopic(widget);
   };
