@@ -8,12 +8,13 @@ import WidgetService from "../../services/WidgetService";
 class ListWidget extends Component {
     state = {
         name: "",
-        text: ""
+        text: "",
+        listType: ""
       }
 
       constructor(props) {
         super(props);
-        this.state = props.widget;
+        this.state = {...props.widget, listType: "UNORDERED_LIST"};
       }
 
       handleListChange = event => {
@@ -23,6 +24,11 @@ class ListWidget extends Component {
       handleWidgetNameChange = event => {
         this.setState({ name: event.target.value });
       };
+
+      handleListTypeChange = event => {
+        this.setState({ listType: event.target.value} );
+      }
+
       handleTypeChange = event => {
         const widget = _.cloneDeep(this.props.widget);
     
@@ -119,7 +125,7 @@ class ListWidget extends Component {
                   className="custom-select"
                   id="listTypeSelect"
                   onChange={this.handleListTypeChange}
-                  value={this.props.widget.ListType}
+                  value={this.props.widget.listType}
                 >
                   <option selected value="UNORDERED_LIST">Unordered List</option>
                   <option value="ORDERED_LIST">
@@ -149,7 +155,8 @@ class ListWidget extends Component {
               </div>
             </div>
             <div>
-              <ListPreviewComponent url={this.state.url} width={this.state.width} height={this.state.height} />
+            <h3> Preview</h3>
+              <ListPreviewComponent text ={this.state.text} listType = {this.state.listType}/>
             </div>
           </div>
         </div>

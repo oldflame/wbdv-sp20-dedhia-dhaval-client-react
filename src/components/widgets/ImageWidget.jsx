@@ -185,6 +185,7 @@ class ImageWidget extends Component {
               </div>
             </div>
             <div>
+            <h3> Preview</h3>
               <ImagePreviewComponent url={this.state.url} width={this.state.width} height={this.state.height} />
             </div>
           </div>
