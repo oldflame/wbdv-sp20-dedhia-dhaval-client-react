@@ -6,6 +6,7 @@ import ListWidget from "./ListWidget";
 import ParagraphPreviewComponent from './ParagraphPreviewComponent';
 import HeadingPreviewComponent from './HeadingPreviewComponent';
 import ImagePreviewComponent from './ImagePreviewComponent';
+import ListPreviewComponent from './ListPreviewComponent';
 import { connect } from "react-redux";
 import "../../services/WidgetService";
 import WidgetService, {
@@ -39,14 +40,14 @@ class WidgetListComponent extends Component {
       <div>
         <div className="row">
           <div className="offset-9 col-3">
-            <div class="custom-control custom-switch pull-left mr-3">
+            <div className="custom-control custom-switch pull-left mr-3">
               <input
                 onChange={this.togglePreview}
                 type="checkbox"
-                class="custom-control-input"
+                className="custom-control-input"
                 id="customSwitch1"
               />
-              <label class="custom-control-label" for="customSwitch1">
+              <label className="custom-control-label" for="customSwitch1">
                 Preview
               </label>
             </div>
@@ -115,9 +116,18 @@ class WidgetListComponent extends Component {
               {widget.type === "IMAGE" && (
                 <ImagePreviewComponent
                   key={widget.id}
+                  widget={widget}
                   url={widget.url}
                   width={widget.width}
                   height={widget.height}
+                />
+              )}
+              {widget.type === "LIST" && (
+                <ListPreviewComponent
+                  key={widget.id}
+                  widget={widget}
+                  text ={this.state.text} 
+                  listType = {this.state.listType}
                 />
               )}
             </>
@@ -171,6 +181,7 @@ const dispatchToPropertyMapper = dispatch => {
       );
     },
     findWidgetsForTopic: topicId => {
+      console.log("find all widgets",topicId)
       WidgetService.findWidgetsForTopic(topicId).then(widgets =>
         dispatch({
           type: "FIND_WIDGET_FOR_TOPIC",

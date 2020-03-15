@@ -22,21 +22,27 @@ class TopicListItemComponent extends Component {
   }
 
   setSelectedTopic = () => {
-    this.props.history.push(`/course-editor/${this.props.courseId}/module/${this.props.moduleId}/lessons/${this.props.lessonId}/topics/${this.props.topic._id}`)
+    this.props.history.push(`/course-editor/${this.props.courseId}/module/${this.props.moduleId}/lessons/${this.props.lessonId}/topics/${this.props.topic.id}`)
+  }
+
+  deleteTopicClicked = () => {
+    this.props.deleteTopicForLesson(this.props.topic.id)
+    this.props.history.push(`/course-editor/${this.props.courseId}/module/${this.props.moduleId}/lessons/${this.props.lessonId}`)
+
   }
 
   componentDidMount(){
-    this.setState({ isSelected: this.props.topic._id == this.props.topicId });
+    this.setState({ isSelected: this.props.topic.id == this.props.topicId });
 
   }
 
   componentDidUpdate(){
     if (
       this.state.isSelected !=
-      (this.props.topic._id == this.props.topicId)
+      (this.props.topic.id == this.props.topicId)
     ) {
       this.setState({
-        isSelected: this.props.topic._id == this.props.topicId
+        isSelected: this.props.topic.id == this.props.topicId
       });
     }
   }
@@ -57,7 +63,7 @@ class TopicListItemComponent extends Component {
                   className="fa fa-pencil ml-2 mx-1 text-info"
                   onClick={() => this.setState({ editEnabled: true })}
                 ></i>
-                <i className="fa fa-times mx-1 text-danger" onClick={() => this.props.deleteTopicForModule(this.props.topic._id)}></i>
+                <i className="fa fa-times mx-1 text-danger" onClick={this.deleteTopicClicked}></i>
               </>
             )}
             {this.state.editEnabled && (
@@ -90,7 +96,7 @@ class TopicListItemComponent extends Component {
 
 const dispatchToPropertyMapper = dispatch => {
   return {
-    deleteTopicForModule: topicId => {
+    deleteTopicForLesson: topicId => {
       topicService.deleteTopic(topicId).then(
         dispatch({
           type: "DELETE_TOPIC_FOR_LESSON",
@@ -99,7 +105,7 @@ const dispatchToPropertyMapper = dispatch => {
       );
     },
     updateTopicForModule: topic => {
-      topicService.updateTopic(topic._id, topic).then(
+      topicService.updateTopic(topic.id, topic).then(
         dispatch({
           type: "UPDATE_TOPIC_FOR_LESSON",
           topic: topic

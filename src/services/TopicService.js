@@ -1,4 +1,5 @@
-const API_URL = "https://wbdv-generic-server.herokuapp.com/api/001835414/"
+//const API_URL = "https://wbdv-generic-server.herokuapp.com/api/001835414/"
+const API_URL = "http://localhost:8080/api/"
 
 
 export const createTopic = async (lessonId, topic) => {

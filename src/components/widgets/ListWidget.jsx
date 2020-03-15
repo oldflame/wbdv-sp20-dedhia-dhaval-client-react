@@ -29,6 +29,14 @@ class ListWidget extends Component {
         this.setState({ listType: event.target.value} );
       }
 
+      updateWidgetData = () => {
+        const widget = _.cloneDeep(this.props.widget);
+        widget.text = this.state.text;
+        widget.name = this.state.name;
+        this.props.updateWidgetForTopic(widget);
+      };
+    
+
       handleTypeChange = event => {
         const widget = _.cloneDeep(this.props.widget);
     
