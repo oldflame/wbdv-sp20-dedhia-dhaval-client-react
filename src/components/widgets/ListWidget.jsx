@@ -7,13 +7,18 @@ import WidgetService from "../../services/WidgetService";
 
 class ListWidget extends Component {
     state = {
-        name: "Widget name"
+        name: "",
+        text: ""
       }
 
       constructor(props) {
         super(props);
         this.state = props.widget;
       }
+
+      handleListChange = event => {
+        this.setState({ text: event.target.value });
+      };
 
       handleWidgetNameChange = event => {
         this.setState({ name: event.target.value });
@@ -101,49 +106,39 @@ class ListWidget extends Component {
                 </button>
               </div>
               <div className="col-12">
-                <input
-                  type="textarea"
-                  className="form-control"
-                  placeholder="Image URL"
-                  value={this.state.url}
-                  onChange={this.handleURLChange}
-                />
+              <textarea
+                type="text"
+                className="form-control"
+                placeholder="List Text"
+                onChange={this.handleListChange}
+                value={this.state.text}
+              />
               </div>
+              <div className="col-12 mt-2">
+              <select
+                  className="custom-select"
+                  id="listTypeSelect"
+                  onChange={this.handleListTypeChange}
+                  value={this.props.widget.ListType}
+                >
+                  <option selected value="UNORDERED_LIST">Unordered List</option>
+                  <option value="ORDERED_LIST">
+                    Ordered List
+                  </option>
+                </select>
+                
+              </div>
+
               <div className="col-12">
                 <input
                   type="textarea"
-                  className="form-control mt-3 my-2"
+                  className="form-control mt-3"
                   placeholder="Widget Name"
                   value={this.state.name}
                   onChange={this.handleWidgetNameChange}
                 />
               </div>
-
-              <div className="col-md-6 mt-3">
-                <p>Image Width</p>
-                <input
-                  type="number"
-                  className="form-control"
-                  placeholder="100"
-                  value={this.state.width}
-                  onChange={this.handleWidthChange}
-                />
-              </div>
-              <div className="col-md-6 mt-3">
-                <p>Image Height</p>
-                <input
-                  type="number"
-                  className="form-control"
-                  placeholder="100"
-                  value={this.state.height}
-                  onChange={this.handleHeightChange}
-                />
-              </div>
-
-              <div className="col-12 mt-3">
-                <img className="shadow" src={this.state.url} width={this.state.width} height={this.state.height} />
-              </div>
-              <div className="offset-11 col-1">
+              <div className="offset-11 col-1 mt-2">
                 <button
                   type="button"
                   className="btn btn-success"

@@ -83,7 +83,7 @@ class WidgetListComponent extends Component {
                 key={widget.id}
                 widget={widget}
                 widgetIndex={$index}
-                //widgetCount={this.props.widget.length}
+                widgetCount={this.props.widgets.length}
                 />
               )}
               {widget.type === "LIST" && (
@@ -91,7 +91,7 @@ class WidgetListComponent extends Component {
                 key={widget.id}
                 widget={widget}
                 widgetIndex={$index}
-                //widgetCount={this.props.widget.length}
+                widgetCount={this.props.widgets.length}
                 />
               )}
             </>
