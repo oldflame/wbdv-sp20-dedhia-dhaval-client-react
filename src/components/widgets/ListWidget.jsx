@@ -33,6 +33,7 @@ class ListWidget extends Component {
         const widget = _.cloneDeep(this.props.widget);
         widget.text = this.state.text;
         widget.name = this.state.name;
+        widget.listType = this.state.listType;
         this.props.updateWidgetForTopic(widget);
       };
     

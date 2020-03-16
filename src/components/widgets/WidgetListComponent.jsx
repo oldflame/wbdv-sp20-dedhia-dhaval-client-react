@@ -126,8 +126,8 @@ class WidgetListComponent extends Component {
                 <ListPreviewComponent
                   key={widget.id}
                   widget={widget}
-                  text ={this.state.text} 
-                  listType = {this.state.listType}
+                  text ={widget.text} 
+                  listType = {widget.listType}
                 />
               )}
             </>
