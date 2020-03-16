@@ -36,6 +36,7 @@ class ListWidget extends Component {
         widget.listType = this.state.listType;
         this.props.updateWidgetForTopic(widget);
       };
+
     
 
       handleTypeChange = event => {
